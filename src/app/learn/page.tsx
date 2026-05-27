@@ -80,10 +80,10 @@ export default function LearnPage() {
                   const cardKey = `${si}-${i}`;
                   const isExpanded = expandedCards[cardKey];
                   return (
-                    <div
+                    <button
                       key={i}
                       onClick={() => toggleCard(cardKey)}
-                      className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                      className="w-full text-left bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
                     >
                       <span className="text-2xl block mb-3">{article.icon}</span>
                       <h3 className="font-medium text-gray-900 mb-2">{article.title}</h3>
@@ -96,7 +96,7 @@ export default function LearnPage() {
                       <span className="inline-block mt-3 text-xs font-medium text-emerald-600">
                         {isExpanded ? t("learn.showLess") : t("learn.readMore")}
                       </span>
-                    </div>
+                    </button>
                   );
                 })}
               </div>
