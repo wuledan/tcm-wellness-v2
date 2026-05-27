@@ -201,9 +201,24 @@ export default function FoodScanPage() {
 
   const handleManualSearch = () => {
     if (!manualFood.trim()) return;
-    const found = foodDB[manualFood.trim()];
+    const query = manualFood.trim();
+    // Try exact match first (Chinese key), then English name lookup
+    let found: FoodDBEntry | undefined = foodDB[query];
     if (!found) {
-      alert("Food not found in our database. Try a different name or upload a photo.");
+      found = Object.values(foodDB).find(
+        (f) => f.nameEn.toLowerCase() === query.toLowerCase()
+      );
+    }
+    if (!found) {
+      // Try partial match on English or Chinese name
+      found = Object.values(foodDB).find(
+        (f) =>
+          f.nameEn.toLowerCase().includes(query.toLowerCase()) ||
+          f.nameZh.includes(query)
+      );
+    }
+    if (!found) {
+      alert("Food not found. Try another name or upload a photo.");
       return;
     }
 
