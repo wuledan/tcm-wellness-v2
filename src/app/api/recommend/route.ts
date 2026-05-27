@@ -11,45 +11,7 @@ export async function POST(request: NextRequest) {
     const typeLabel = constitutionName || constitutionType || "balanced constitution";
     const seasonLabel = season || "the current season";
 
-    const userPrompt = `You are a TCM wellness expert. Provide daily personalized wellness recommendations for a person with ${typeLabel} constitution during ${seasonLabel}.
-
-Return ONLY valid JSON in this exact format (no markdown, no code fences):
-{
-  "meals": {
-    "breakfast": {
-      "name": "Warm Nourishing Porridge",
-      "name_zh": "温补粥品",
-      "description": "English description of this meal recommendation (1-2 sentences)",
-      "description_zh": "中文描述（1-2句）",
-      "foods": ["Oats", "Chinese Yam", "Red Dates"]
-    },
-    "lunch": {
-      "name": "Balanced Rice Bowl",
-      "name_zh": "均衡饭食",
-      "description": "English description (1-2 sentences)",
-      "description_zh": "中文描述（1-2句）",
-      "foods": ["Brown rice", "Steamed fish", "Cooked vegetables"]
-    },
-    "dinner": {
-      "name": "Light Soup Meal",
-      "name_zh": "清淡汤品",
-      "description": "English description (1-2 sentences)",
-      "description_zh": "中文描述（1-2句）",
-      "foods": ["Vegetable soup", "Tofu", "Mushrooms"]
-    }
-  },
-  "exercise": {
-    "name": "Recommended Exercise",
-    "name_zh": "推荐运动",
-    "duration": "30-45 minutes",
-    "description": "English description of exercise recommendation",
-    "description_zh": "中文运动建议说明"
-  },
-  "lifestyle_tips": [
-    { "tip_en": "Go to bed before 11pm", "tip_zh": "晚上11点前入睡" },
-    { "tip_en": "Another English tip", "tip_zh": "另一条中文建议" }
-  ]
-}`;
+    const userPrompt = `TCM wellness expert. Recommend for ${typeLabel} in ${seasonLabel}. Return JSON: {"meals":{"breakfast":{"name":"Meal name","name_zh":"中文","description":"Eng","description_zh":"中文","foods":["Oats","Yam"]},"lunch":{"name":"","name_zh":"","description":"","description_zh":"","foods":["Brown rice","Fish"]},"dinner":{"name":"","name_zh":"","description":"","description_zh":"","foods":["Soup","Tofu"]}},"exercise":{"name":"","name_zh":"","duration":"","description":"","description_zh":""},"lifestyle_tips":[{"tip_en":"","tip_zh":""},{"tip_en":"","tip_zh":""}]}. Foods in English. Descriptions bilingual.`;
 
     const response = await fetch(`${API_BASE}/chat/completions`, {
       method: "POST",
@@ -61,7 +23,6 @@ Return ONLY valid JSON in this exact format (no markdown, no code fences):
         model: "deepseek-v4-flash",
         messages: [{ role: "user", content: userPrompt }],
         temperature: 0.7,
-        reasoning_effort: "disabled",
         response_format: { type: "json_object" },
       }),
     });

@@ -1,0 +1,308 @@
+{
+  "header": {
+    "logo": "TCM Sức Khỏe",
+    "nav": {
+      "home": "Trang chủ",
+      "quiz": "Kiểm tra thể chất",
+      "dashboard": "Bảng điều khiển",
+      "foodScan": "Quét thực phẩm",
+      "learn": "Học",
+      "daily": "Hằng ngày"
+    },
+    "auth": {
+      "signIn": "Đăng nhập",
+      "logout": "Đăng xuất"
+    }
+  },
+  "footer": {
+    "description": "Thực phẩm là thuốc, cá nhân hóa cho từng người. Trí tuệ Trung Hoa cổ đại kết hợp với AI hiện đại.",
+    "quickLinks": "Liên kết nhanh",
+    "links": {
+      "bodyTypeQuiz": "Kiểm tra thể chất",
+      "foodScanner": "Quét thực phẩm",
+      "learnTcm": "Tìm hiểu TCM",
+      "dailyWellness": "Sức khỏe hằng ngày",
+      "aboutUs": "Về chúng tôi"
+    },
+    "legal": "Pháp lý",
+    "legalText": "⚕️ Nội dung chỉ mang tính giáo dục. Không phải lời khuyên y tế. Luôn tham khảo ý kiến của nhà cung cấp dịch vụ y tế có trình độ trước khi thực hiện bất kỳ thay đổi nào đối với chế độ ăn uống, tập thể dục hoặc sức khỏe của bạn.",
+    "copyright": "© {year} TCM Sức Khỏe. Bảo lưu mọi quyền."
+  },
+  "home": {
+    "badge": "Trí tuệ cổ xưa × AI Hiện đại",
+    "heroTitle": "Thực phẩm là thuốc, {highlight}Cá nhân hóa{/highlight}",
+    "heroSubtitle": "TCM Sức Khỏe sử dụng 2.000 năm trí tuệ Y học Cổ truyền Trung Quốc — kết hợp với AI — để đưa ra các đề xuất về thực phẩm, tập thể dục và lối sống dựa trên thể chất độc đáo của bạn.",
+    "ctaQuiz": "Khám phá thể chất của bạn",
+    "ctaLearnMore": "Tìm hiểu thêm",
+    "problemTitle": "Tại sao hầu hết lời khuyên sức khỏe{highlight}không phù hợp với bạn{/highlight}",
+    "problemSubtitle": "Cách tiếp cận một kích cỡ cho tất cả bỏ qua một sự thật đơn giản — mỗi cơ thể là khác nhau.",
+    "problems": [
+      {
+        "icon": "🥗",
+        "title": "Bác sĩ phương Tây không bàn về thực phẩm",
+        "description": "Y học hiện đại hiếm khi đề cập đến cách thực phẩm ảnh hưởng đến cơ thể bạn. Bạn nhận được đơn thuốc, không phải kế hoạch ăn uống."
+      },
+      {
+        "icon": "📱",
+        "title": "Ứng dụng ăn kiêng không hiểu bạn",
+        "description": "Đếm calo chung chung bỏ qua thể chất của bạn. Những gì hiệu quả với người khác có thể không phù hợp với thể chất CỦA BẠN."
+      },
+      {
+        "icon": "🔒",
+        "title": "2.000 Năm Trí Tuệ, Bị Khóa Kín",
+        "description": "Trí tuệ thực phẩm cá nhân hóa của TCM đã cổ xưa, đã được kiểm chứng và mạnh mẽ — nhưng phần lớn không thể tiếp cận ở phương Tây."
+      }
+    ],
+    "whyTcmTitle": "Tại sao chọn Liệu pháp Thực phẩm TCM?",
+    "whyTcmSubtitle": "Hai nghìn năm y học cá nhân hóa kết hợp với AI hiện đại.",
+    "westernTitle": "Dinh dưỡng phương Tây",
+    "westernItems": [
+      "Tập trung vào calo, dinh dưỡng đa lượng và thành phần chuẩn hóa",
+      "Hướng dẫn giống nhau cho tất cả — một kích cỡ cho tất cả",
+      "Giản lược: thực phẩm bị phân tách thành các thành phần riêng lẻ",
+      "Điều trị triệu chứng sau khi chúng xuất hiện"
+    ],
+    "tcmTitle": "Liệu pháp Thực phẩm TCM",
+    "tcmItems": [
+      "Tập trung vào tính chất thực phẩm (lạnh/mát/trung tính/ấm/nóng) và thể chất của bạn",
+      "Cá nhân hóa: 9 thể chất, mỗi loại có nhu cầu ăn uống riêng",
+      "Toàn diện: thực phẩm ảnh hưởng toàn bộ hệ thống, năng lượng và sự cân bằng",
+      "Phòng ngừa: ăn để duy trì cân bằng trước khi bệnh phát sinh"
+    ],
+    "foodExampleTitle": "Cùng một thực phẩm, thể chất khác nhau, kết quả khác nhau",
+    "foodExampleSubtitle": "同一食物，不同体质，不同答案",
+    "foodExampleItems": [
+      { "emoji": "❄️", "constitution": "阳虚质 (Yang Deficiency)", "verdict": "✅ Phù hợp", "color": "text-blue-600" },
+      { "emoji": "🔥", "constitution": "阴虚质 (Yin Deficiency)", "verdict": "⚠️ Thận trọng", "color": "text-red-600" },
+      { "emoji": "☀️", "constitution": "湿热质 (Damp-Heat)", "verdict": "❌ Tránh", "color": "text-amber-600" }
+    ],
+    "howItWorksTitle": "Cách hoạt động",
+    "howItWorksSubtitle": "Hành trình sức khỏe cá nhân hóa của bạn trong bốn bước đơn giản.",
+    "steps": [
+      { "number": "01", "title": "Biết cơ thể bạn", "description": "Làm bài kiểm tra 2 phút để khám phá thể chất TCM của bạn." },
+      { "number": "02", "title": "Quét thực phẩm", "description": "Chụp ảnh bất kỳ món ăn nào. AI phân tích tính chất TCM cho cơ thể bạn." },
+      { "number": "03", "title": "Nhận kế hoạch", "description": "Nhận đề xuất cá nhân hóa về chế độ ăn uống, tập thể dục và lối sống." },
+      { "number": "04", "title": "Theo dõi tiến độ", "description": "Theo dõi thay đổi và cải thiện hành trình sức khỏe của bạn theo thời gian." }
+    ],
+    "stats": [
+      { "value": "9", "label": "Thể chất" },
+      { "value": "500+", "label": "Thực phẩm" },
+      { "value": "24", "label": "Tiết khí" },
+      { "value": "AI", "label": "Hỗ trợ" }
+    ],
+    "ctaTitle": "Sẵn sàng khám phá thể chất của bạn?",
+    "ctaText": "Làm bài kiểm tra thể chất 2 phút và nhận các đề xuất sức khỏe cá nhân hóa dựa trên thể chất độc đáo của bạn.",
+    "ctaButton": "Bắt đầu kiểm tra"
+  },
+  "about": {
+    "heroTitle": "Bạn có đang vật lộn với sương mù não, mệt mỏi buổi chiều và tăng cân không rõ nguyên nhân?",
+    "heroText": "Bạn đã thử mọi chế độ ăn kiêng, mọi xu hướng sức khỏe — nhưng kết quả luôn tạm thời. Nếu câu trả lời không phải là một chế độ ăn mới, mà là một trí tuệ cổ xưa coi cơ thể bạn là độc nhất thì sao?",
+    "stage1Label": "Giai đoạn 1 · Vấn đề",
+    "stage1Title": "Cuộc sống hiện đại, Vấn đề hiện đại",
+    "stage1Items": [
+      { "icon": "🧠", "title": "Sương mù não", "desc": "Không thể tập trung lúc 2 giờ chiều? Hệ tiêu hóa của bạn có thể đang lấy năng lượng từ não." },
+      { "icon": "😴", "title": "Mệt mỏi buổi chiều", "desc": "Cảm thấy kiệt sức sau bữa trưa? Cơ thể bạn đang vật lộn để xử lý những gì bạn đã ăn." },
+      { "icon": "⚖️", "title": "Khó khăn về cân nặng", "desc": "Mọi chế độ ăn đều hiệu quả với người khác nhưng không với bạn? Thể chất của bạn cần một cách tiếp cận khác." }
+    ],
+    "stage2Label": "Giai đoạn 2 · Tại sao phương pháp phương Tây không đủ",
+    "stage2Title": "Đã thử mọi phương pháp nhưng kết quả chỉ tạm thời?",
+    "stage2Text1": "Sức khỏe hiện đại điều trị triệu chứng, không phải nguyên nhân gốc rễ. Nó đưa ra giải pháp giống nhau cho tất cả — đếm calo, cắt giảm carb, ăn ít hơn — mà không hỏi câu hỏi quan trọng nhất:",
+    "stage2Quote": "“Thể chất CỦA BẠN là gì?”",
+    "stage2Text2": "Dinh dưỡng phương Tây coi thực phẩm là con số. TCM coi thực phẩm là năng lượng — ấm hoặc mát, bổ dưỡng hoặc tiêu hao — tương tác khác nhau với mọi cơ thể độc đáo.",
+    "stage3Label": "Giai đoạn 3 · Giải pháp",
+    "stage3Title": "Hãy thử 2.000 năm trí tuệ Trung Hoa tích lũy — cho cơ thể bạn, một cách độc đáo.",
+    "stage3Text1": "TCM (Y học Cổ truyền Trung Quốc) đã là y học cá nhân hóa trong hơn hai thiên niên kỷ. Hiểu biết cốt lõi của nó đơn giản nhưng sâu sắc: mỗi người có một thể chất độc đáo, và những gì chữa lành người này có thể gây hại cho người khác.",
+    "stage3Text2": "Nền tảng AI của chúng tôi mang trí tuệ cổ xưa này đến đầu ngón tay của bạn:",
+    "stage3Items": [
+      { "icon": "🧬", "text": "Khám phá thể chất TCM độc đáo của bạn trong 2 phút" },
+      { "icon": "📸", "text": "Quét bất kỳ thực phẩm nào để xem nó có phù hợp với cơ thể bạn không" },
+      { "icon": "🥗", "text": "Nhận kế hoạch bữa ăn, tập thể dục và lối sống cá nhân hóa" },
+      { "icon": "🌍", "text": "Hỗ trợ tiếng Anh và tiếng Trung" }
+    ],
+    "ctaTitle": "Sẵn sàng tìm hiểu cơ thể bạn?",
+    "ctaText": "2.000 năm trí tuệ. 2 phút thời gian của bạn. Một đời sức khỏe tốt hơn.",
+    "ctaButton": "Khám phá thể chất của bạn"
+  },
+  "daily": {
+    "title": "Sức Khỏe Hằng Ngày",
+    "subtitle": "Liều lượng trí tuệ TCM hàng ngày của bạn",
+    "dayOf": "Ngày {day} / 7",
+    "tipTitle": "Mẹo Sức Khỏe Hằng Ngày",
+    "forYourBodyType": "Dành cho thể chất {name} của bạn: ",
+    "tips": [
+      "Bắt đầu buổi sáng với một cốc nước ấm pha chanh để nhẹ nhàng đánh thức hệ tiêu hóa.",
+      "Cố gắng ăn bữa lớn nhất vào bữa trưa khi hệ tiêu hóa (Tỳ Khí) mạnh nhất, từ 11h-13h.",
+      "Tập thở bụng sâu trong 5 phút trước bữa ăn để kích hoạt hệ thần kinh phó giao cảm.",
+      "Nhai mỗi miếng 20-30 lần — tiêu hóa bắt đầu từ miệng. Tỳ của bạn sẽ cảm ơn.",
+      "Tránh đồ uống có đá trong bữa ăn. Chất lỏng lạnh làm giảm lửa tiêu hóa.",
+      "Đi bộ 10 phút sau bữa trưa để hỗ trợ cân bằng đường huyết và dòng năng lượng.",
+      "Ăn tối ít nhất 3 giờ trước khi ngủ để tiêu hóa đúng cách."
+    ],
+    "solarTerm": {
+      "currentLabel": "Tiết khí hiện tại",
+      "dietaryAdvice": "🥗 Lời khuyên ăn uống",
+      "lifestyleAdvice": "🧘 Lời khuyên sinh hoạt",
+      "calendarTitle": "📅 Lịch 24 Tiết Khí"
+    }
+  },
+  "dashboard": {
+    "title": "Bảng Điều Khiển Sức Khỏe Cá Nhân",
+    "mealSuggestions": "🥗 Gợi ý Bữa Ăn Hôm Nay",
+    "aiLoading": "✨ AI đang cá nhân hóa đề xuất cho bạn...",
+    "meals": {
+      "breakfast": { "time": "Bữa sáng", "fallback": "Bữa sáng ấm bổ dưỡng", "tip": "Bắt đầu ngày mới với thực phẩm ấm, dễ tiêu hóa" },
+      "lunch": { "time": "Bữa trưa", "fallback": "Bữa trưa cân bằng", "tip": "Bao gồm protein, carb phức hợp và rau nấu chín" },
+      "dinner": { "time": "Bữa tối", "fallback": "Bữa tối nhẹ", "tip": "Ăn tối sớm và nhẹ để ngủ ngon hơn" }
+    },
+    "scanLink": "🔍 Quét thực phẩm để kiểm tra xem có phù hợp với bạn không →",
+    "exercise": { "title": "🏃 Bài tập hôm nay", "frequency": "Tần suất:", "frequencyText": "30-45 phút, 4-5 lần/tuần" },
+    "lifestyle": { "title": "💡 Mẹo sinh hoạt" },
+    "solarTermTitle": "{nameEn}—{nameZh} Hướng dẫn Sức khỏe",
+    "solarTermDiet": "Ăn uống:",
+    "solarTermLifestyle": "Sinh hoạt:",
+    "navItems": [
+      { "label": "Quét thực phẩm" },
+      { "label": "Học" },
+      { "label": "Mẹo hàng ngày" },
+      { "label": "Hồ sơ của tôi" }
+    ]
+  },
+  "foodScan": {
+    "title": "Máy Quét Thực Phẩm",
+    "subtitle": "Chụp ảnh hoặc nhập tên thực phẩm để kiểm tra tính tương thích TCM",
+    "scanCount": "📸 Số lần quét hôm nay: {count} / 3 (Miễn phí)",
+    "uploadHint": "Chụp hoặc tải lên ảnh thực phẩm",
+    "uploadSubtext": "Nhấp để chọn ảnh",
+    "orDivider": "HOẶC",
+    "manualTitle": "🔍 Nhập tên thực phẩm",
+    "manualPlaceholder": "VD: 红烧肉, dưa hấu, trà gừng...",
+    "checkButton": "Kiểm tra",
+    "checkingButton": "...",
+    "loadingTitle": "Đang phân tích thực phẩm...",
+    "loadingSubtext": "Nhận diện nguyên liệu và tính chất TCM",
+    "result": {
+      "kcal": "≈{kcal}kcal mỗi khẩu phần",
+      "alternative": "💡 Đề xuất thay thế",
+      "scanAnother": "Quét thực phẩm khác",
+      "askAi": "🤖 Hỏi AI: Bữa trưa hôm nay"
+    },
+    "foodNotFound": "Không tìm thấy thực phẩm trong cơ sở dữ liệu. Hãy thử tên khác hoặc tải lên ảnh.",
+    "disclaimer": "⚕️ Phân tích thực phẩm chỉ mang tính giáo dục. Không phải lời khuyên y tế. Kết quả được mô phỏng cho bản demo MVP."
+  },
+  "learn": {
+    "title": "Tìm Hiểu TCM Sức Khỏe",
+    "subtitle": "Khám phá trí tuệ Y học Cổ truyền Trung Quốc — từ các loại thể chất đến liệu pháp ăn uống và hơn thế nữa.",
+    "quickRef": "Tham khảo nhanh: Các loại thể chất",
+    "readMore": "Đọc thêm →",
+    "disclaimer": "⚕️ Tất cả nội dung chỉ mang tính giáo dục. Không phải lời khuyên y tế. Tham khảo ý kiến bác sĩ TCM có trình độ hoặc nhà cung cấp dịch vụ y tế.",
+    "categories": [
+      {
+        "title": "Thể Chất",
+        "subtitle": "Body Constitution",
+        "articles": [
+          { "title": "Hiểu về 9 Loại Thể Chất trong TCM", "summary": "Tổng quan về chín loại thể chất và ý nghĩa của chúng đối với sức khỏe.", "icon": "🧬" },
+          { "title": "Khí Hư Chất — Khi Pin Bạn Yếu", "summary": "Dấu hiệu, nguyên nhân và chiến lược ăn uống cho người khí hư.", "icon": "💨" },
+          { "title": "Dương Hư Chất — Thể Chất Lạnh", "summary": "Tại sao bạn luôn cảm thấy lạnh và cách làm ấm từ bên trong.", "icon": "❄️" },
+          { "title": "Âm Hư Chất — Nhiệt Bên Trong", "summary": "Hiểu về nhiệt nội và cách làm mát, bổ dưỡng cơ thể.", "icon": "🔥" }
+        ]
+      },
+      {
+        "title": "Hiểu Biết Về Triệu Chứng",
+        "subtitle": "Symptom Insights",
+        "articles": [
+          { "title": "Sương mù não: Góc nhìn TCM", "summary": "TCM coi sương mù não là Tỳ khí hư. Tìm hiểu chế độ ăn ảnh hưởng đến sự minh mẫn.", "icon": "🧠" },
+          { "title": "Mệt mỏi buổi chiều & Đồng hồ cơ thể", "summary": "Tại sao bạn kiệt sức lúc 2 giờ chiều theo đồng hồ TCM.", "icon": "⏰" },
+          { "title": "Hiểu về đầy hơi từ góc nhìn TCM", "summary": "Đầy hơi thường là Tỳ khí ứ trệ. Khám phá thực phẩm nào giúp ích.", "icon": "🫧" },
+          { "title": "Mất ngủ: Tìm loại giấc ngủ của bạn", "summary": "Các vấn đề giấc ngủ khác nhau chỉ ra sự mất cân bằng cơ quan khác nhau trong TCM.", "icon": "🌙" }
+        ]
+      },
+      {
+        "title": "Phương Đông Gặp Phương Tây",
+        "subtitle": "East Meets West",
+        "articles": [
+          { "title": "TCM vs Dinh dưỡng phương Tây: So sánh", "summary": "Hai mô hình y học tiếp cận thực phẩm và sức khỏe khác nhau như thế nào.", "icon": "🔄" },
+          { "title": "Tỳ trong TCM vs Y học phương Tây", "summary": "Tỳ trong TCM không phải là cùng một cơ quan — tìm hiểu ý nghĩa thực sự.", "icon": "🔬" },
+          { "title": "Viêm: Góc nhìn TCM và phương Tây", "summary": "Phương pháp chống viêm phương Tây kết hợp với thanh nhiệt giải độc TCM.", "icon": "🔥" },
+          { "title": "Sức khỏe đường ruột: Một khái niệm, Hai mô hình", "summary": "Lý thuyết Tỳ-Vị TCM kết nối với nghiên cứu hệ vi sinh vật hiện đại.", "icon": "🦠" }
+        ]
+      }
+    ]
+  },
+  "login": {
+    "title": "Chào mừng",
+    "subtitle": "Đăng nhập để truy cập bảng điều khiển sức khỏe cá nhân hóa của bạn",
+    "nameLabel": "Tên (không bắt buộc)",
+    "namePlaceholder": "VD: Nguyễn Văn A",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "emailHint": "Sử dụng bất kỳ email nào để đăng nhập (bản demo MVP)",
+    "submitButton": "Đăng nhập →",
+    "loading": "Đang tải..."
+  },
+  "quiz": {
+    "questionOf": "Câu {current}/{total}",
+    "nextButton": "Tiếp →",
+    "submitButton": "Xem kết quả →",
+    "analyzingTitle": "Đang phân tích câu trả lời...",
+    "analyzingSubtext": "Kết hợp trí tuệ TCM cổ xưa với AI hiện đại"
+  },
+  "quizResult": {
+    "primaryLabel": "Thể chất chính của bạn",
+    "dietPrinciple": "🥗 Nguyên tắc ăn uống",
+    "recommendedFoods": "✅ Thực phẩm khuyên dùng",
+    "avoidFoods": "❌ Thực phẩm cần tránh",
+    "exercise": "🏃 Đề xuất bài tập",
+    "lifestyleTips": "💡 Mẹo sinh hoạt",
+    "secondaryHint": "Bạn cũng có đặc điểm của {nameZh} ({name})",
+    "viewDashboard": "Xem bảng điều khiển →",
+    "shareResult": "📤 Chia sẻ kết quả",
+    "retakeQuiz": "Làm lại bài kiểm tra",
+    "shareText": "Tôi đã khám phá thể chất của mình: {nameZh}({nameEn})! 🌿 Hãy làm bài kiểm tra thể chất TCM.",
+    "shareTitle": "Thể chất TCM của tôi",
+    "copiedAlert": "Đã sao chép kết quả vào bảng nhớ tạm!"
+  },
+  "profile": {
+    "title": "Hồ Sơ Của Tôi",
+    "primaryLabel": "Thể chất chính của bạn",
+    "retakeQuiz": "Làm lại bài kiểm tra",
+    "bodyData": "📏 Dữ liệu cơ thể",
+    "bodyDataHint": "Tùy chọn: Dữ liệu cơ thể giúp chúng tôi cung cấp đề xuất cá nhân hóa chính xác hơn.",
+    "fields": {
+      "height": "Chiều cao (cm)",
+      "heightPlaceholder": "VD: 168",
+      "weight": "Cân nặng (kg)",
+      "weightPlaceholder": "VD: 62",
+      "age": "Tuổi",
+      "agePlaceholder": "VD: 32",
+      "gender": "Giới tính",
+      "genderPlaceholder": "Chọn",
+      "genderMale": "Nam",
+      "genderFemale": "Nữ",
+      "genderOther": "Khác",
+      "exercise": "Tần suất tập thể dục",
+      "exercisePlaceholder": "Chọn",
+      "exerciseRarely": "Hiếm khi",
+      "exercise1to2": "1-2 lần/tuần",
+      "exercise3to5": "3-5 lần/tuần",
+      "exerciseDaily": "Hàng ngày",
+      "sleep": "Thời lượng ngủ",
+      "sleepPlaceholder": "Chọn",
+      "sleepLess5": "Dưới 5 giờ",
+      "sleep5to6": "5-6 giờ",
+      "sleep7to8": "7-8 giờ",
+      "sleepMore8": "Hơn 8 giờ"
+    },
+    "saveButton": "Lưu dữ liệu cơ thể",
+    "savedButton": "✅ Đã lưu!",
+    "quickLinks": "🔗 Liên kết nhanh",
+    "links": [
+      { "label": "Bảng điều khiển", "icon": "🏠" },
+      { "label": "Quét thực phẩm", "icon": "📷" },
+      { "label": "Mẹo hàng ngày", "icon": "🌅" },
+      { "label": "Học TCM", "icon": "📖" }
+    ]
+  },
+  "common": {
+    "toggleMenu": "Chuyển đổi menu"
+  }
+}

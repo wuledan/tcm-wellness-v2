@@ -1,4 +1,10 @@
+"use client";
+
+import { useTranslation } from "@/contexts/LanguageContext";
+
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-gray-50 border-t border-gray-100 mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -6,32 +12,32 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="text-2xl">🌿</span>
-              <span className="font-serif text-lg font-bold text-gray-800">TCM Wellness</span>
+              <span className="font-serif text-lg font-bold text-gray-800">{t("header.logo")}</span>
             </div>
             <p className="text-sm text-gray-500 leading-relaxed">
-              Food as Medicine, Made Personal. Ancient Chinese wisdom powered by modern AI.
+              {t("footer.description")}
             </p>
           </div>
           <div>
-            <h3 className="font-medium text-gray-800 mb-3">Quick Links</h3>
+            <h3 className="font-medium text-gray-800 mb-3">{t("footer.quickLinks")}</h3>
             <ul className="space-y-2 text-sm text-gray-500">
-              <li><a href="/quiz" className="hover:text-emerald-600 transition-colors">Body Type Quiz</a></li>
-              <li><a href="/food-scan" className="hover:text-emerald-600 transition-colors">Food Scanner</a></li>
-              <li><a href="/learn" className="hover:text-emerald-600 transition-colors">Learn TCM</a></li>
-              <li><a href="/daily" className="hover:text-emerald-600 transition-colors">Daily Wellness</a></li>
-              <li><a href="/about" className="hover:text-emerald-600 transition-colors">About Us</a></li>
+              <li><a href="/quiz" className="hover:text-emerald-600 transition-colors">{t("footer.links.bodyTypeQuiz")}</a></li>
+              <li><a href="/food-scan" className="hover:text-emerald-600 transition-colors">{t("footer.links.foodScanner")}</a></li>
+              <li><a href="/learn" className="hover:text-emerald-600 transition-colors">{t("footer.links.learnTcm")}</a></li>
+              <li><a href="/daily" className="hover:text-emerald-600 transition-colors">{t("footer.links.dailyWellness")}</a></li>
+              <li><a href="/about" className="hover:text-emerald-600 transition-colors">{t("footer.links.aboutUs")}</a></li>
             </ul>
           </div>
           <div>
-            <h3 className="font-medium text-gray-800 mb-3">Legal</h3>
+            <h3 className="font-medium text-gray-800 mb-3">{t("footer.legal")}</h3>
             <p className="text-xs text-gray-400 leading-relaxed">
-              ⚕️ Educational content only. Not medical advice. Always consult with a qualified healthcare provider before making any changes to your diet, exercise, or health regimen. The information provided is for general wellness education purposes only.
+              {t("footer.legalText")}
             </p>
           </div>
         </div>
         <div className="border-t border-gray-200 mt-8 pt-8 text-center">
           <p className="text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} TCM Wellness. All rights reserved.
+            {t("footer.copyright").replace("{year}", String(new Date().getFullYear()))}
           </p>
         </div>
       </div>

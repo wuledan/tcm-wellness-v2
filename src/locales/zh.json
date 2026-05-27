@@ -1,0 +1,308 @@
+{
+  "header": {
+    "logo": "TCM 养生",
+    "nav": {
+      "home": "首页",
+      "quiz": "体质测试",
+      "dashboard": "健康面板",
+      "foodScan": "食物扫描",
+      "learn": "学习",
+      "daily": "每日养生"
+    },
+    "auth": {
+      "signIn": "登录",
+      "logout": "退出"
+    }
+  },
+  "footer": {
+    "description": "食物即药物，因人而宜。千年中医智慧，现代 AI 驱动。",
+    "quickLinks": "快捷链接",
+    "links": {
+      "bodyTypeQuiz": "体质测试",
+      "foodScanner": "食物扫描",
+      "learnTcm": "学习中医",
+      "dailyWellness": "每日养生",
+      "aboutUs": "关于我们"
+    },
+    "legal": "法律声明",
+    "legalText": "⚕️ 内容仅供教育用途，不构成医疗建议。在对饮食、运动或健康方案做出任何改变之前，请咨询合格的医疗保健提供者。所提供的信息仅用于一般健康教育。",
+    "copyright": "© {year} TCM 养生。保留所有权利。"
+  },
+  "home": {
+    "badge": "古老智慧 × 现代 AI",
+    "heroTitle": "食物即药物，{highlight}因人而宜{/highlight}",
+    "heroSubtitle": "TCM 养生借助两千年的中医智慧，由 AI 赋能，根据您独特的体质类型提供个性化的饮食、运动和生活方式建议。",
+    "ctaQuiz": "发现你的体质类型",
+    "ctaLearnMore": "了解更多",
+    "problemTitle": "为什么大多数健康建议{highlight}对你不适用{/highlight}",
+    "problemSubtitle": "一刀切的方法忽略了一个简单的真理——每个人的体质都是不同的。",
+    "problems": [
+      {
+        "icon": "🥗",
+        "title": "西医不谈食物",
+        "description": "现代医学很少关注食物如何影响你的独特身体。你得到的是处方，而不是饮食计划。"
+      },
+      {
+        "icon": "📱",
+        "title": "饮食应用不了解你",
+        "description": "通用的卡路里计算忽略了你的体质。对别人有效的，未必适合你的体质。"
+      },
+      {
+        "icon": "🔒",
+        "title": "两千年智慧尘封在外",
+        "description": "中医个性化食疗智慧悠久、有效且强大——但在西方却鲜为人知。"
+      }
+    ],
+    "whyTcmTitle": "为什么选择中医食疗？",
+    "whyTcmSubtitle": "两千年的个性化医学与现代 AI 相遇。",
+    "westernTitle": "西方营养学",
+    "westernItems": [
+      "专注于卡路里、宏量营养素和标准化成分",
+      "对所有人相同的指导标准——一刀切",
+      "还原论：食物被分解为孤立成分",
+      "症状出现后才治疗"
+    ],
+    "tcmTitle": "中医食疗",
+    "tcmItems": [
+      "关注食物性质（寒/凉/平/温/热）与你的体质",
+      "个性化：9种体质，各有独特的饮食需求",
+      "整体观：食物影响你的整个系统、能量和平衡",
+      "预防为主：在疾病发生前通过饮食维持平衡"
+    ],
+    "foodExampleTitle": "同一食物，不同体质，不同答案",
+    "foodExampleSubtitle": "Same food, different body types, different answers",
+    "foodExampleItems": [
+      { "emoji": "❄️", "constitution": "阳虚质", "verdict": "✅ 适合", "color": "text-blue-600" },
+      { "emoji": "🔥", "constitution": "阴虚质", "verdict": "⚠️ 谨慎", "color": "text-red-600" },
+      { "emoji": "☀️", "constitution": "湿热质", "verdict": "❌ 避免", "color": "text-amber-600" }
+    ],
+    "howItWorksTitle": "使用方法",
+    "howItWorksSubtitle": "四步开启你的个性化养生之旅。",
+    "steps": [
+      { "number": "01", "title": "了解你的体质", "description": "用2分钟完成体质测试，发现你的中医体质类型。" },
+      { "number": "02", "title": "扫描食物", "description": "拍摄任何餐食的照片，AI 分析其对你的体质的适配性。" },
+      { "number": "03", "title": "获取方案", "description": "接收个性化的饮食、运动和生活方式建议。" },
+      { "number": "04", "title": "追踪进度", "description": "监控变化，逐步优化你的养生之旅。" }
+    ],
+    "stats": [
+      { "value": "9", "label": "体质类型" },
+      { "value": "500+", "label": "食物匹配" },
+      { "value": "24", "label": "节气" },
+      { "value": "AI", "label": "驱动" }
+    ],
+    "ctaTitle": "准备好发现你的体质类型了吗？",
+    "ctaText": "完成2分钟的体质测试，解锁基于你独特体质的个性化养生建议。",
+    "ctaButton": "开始测试"
+  },
+  "about": {
+    "heroTitle": "你是否正在为脑雾、午后疲劳和不明原因的体重增加而困扰？",
+    "heroText": "你试过每一种饮食法、每一种健康潮流——但结果总是暂时的。如果答案不是一种新饮食法，而是一种将你的身体视为独特的古老智慧呢？",
+    "stage1Label": "第一阶段 · 问题",
+    "stage1Title": "现代生活，现代问题",
+    "stage1Items": [
+      { "icon": "🧠", "title": "脑雾", "desc": "下午2点无法集中注意力？你的消化系统可能正在从大脑中抽取能量。" },
+      { "icon": "😴", "title": "午后疲劳", "desc": "午餐后感到疲惫？你的身体正在努力处理你所吃的食物。" },
+      { "icon": "⚖️", "title": "体重困扰", "desc": "每种饮食法对别人有效但对你不适用？你的体质需要不同的方法。" }
+    ],
+    "stage2Label": "第二阶段 · 为什么西方方法不够好",
+    "stage2Title": "试过每种方法但效果都是暂时的？",
+    "stage2Text1": "现代健康方法治标不治本。它对所有人开出相同的解决方案——计算卡路里、减少碳水、少吃——却没有问出最重要的问题：",
+    "stage2Quote": "「你的体质类型是什么？」",
+    "stage2Text2": "西方营养学把食物看作数字。中医把食物看作能量——温性或凉性、滋养或耗损——与每个独特的身体相互作用的方式各不相同。",
+    "stage3Label": "第三阶段 · 解决方案",
+    "stage3Title": "让我们尝试两千年积累的中医智慧——为你的身体，量身定制。",
+    "stage3Text1": "中医（中国传统医学）作为个性化医学已有两千多年的历史。其核心见解简单而深刻：每个人都有独特的体质，对一个人有益的可能会伤害另一个人。",
+    "stage3Text2": "我们的 AI 平台将这一古老智慧带到你的指尖：",
+    "stage3Items": [
+      { "icon": "🧬", "text": "在2分钟内发现你独特的中医体质类型" },
+      { "icon": "📸", "text": "扫描任何食物，看它是否适合你的体质" },
+      { "icon": "🥗", "text": "获得个性化的饮食、运动和生活方式计划" },
+      { "icon": "🌍", "text": "支持英文和中文" }
+    ],
+    "ctaTitle": "准备好了解你的身体了吗？",
+    "ctaText": "两千年的智慧。两分钟的时间。一生更健康的福祉。",
+    "ctaButton": "发现你的体质类型"
+  },
+  "daily": {
+    "title": "每日养生",
+    "subtitle": "每天一点中医智慧",
+    "dayOf": "第 {day} 天 / 共7天",
+    "tipTitle": "每日养生小贴士",
+    "forYourBodyType": "针对你的 {name} 体质：",
+    "tips": [
+      "早晨喝一杯加柠檬的温水，温和地唤醒你的消化系统。",
+      "午餐吃一天中最丰盛的一餐，此时你的消化火（脾气）最强，大约在11点至13点之间。",
+      "饭前练习5分钟的腹式深呼吸，激活你的副交感神经系统。",
+      "每口饭菜咀嚼20-30次——消化从口腔开始。你的脾会感谢你。",
+      "避免进餐时喝冰镇饮料。冷饮会减弱消化火力。选择温茶或常温开水。",
+      "午餐后散步10分钟，有助于血糖平衡和能量流动。",
+      "至少在睡前3小时吃完晚餐，让消化有足够的时间。"
+    ],
+    "solarTerm": {
+      "currentLabel": "当前节气",
+      "dietaryAdvice": "🥗 饮食建议",
+      "lifestyleAdvice": "🧘 生活建议",
+      "calendarTitle": "📅 二十四节气"
+    }
+  },
+  "dashboard": {
+    "title": "你的个性化健康面板",
+    "mealSuggestions": "🥗 今日饮食建议",
+    "aiLoading": "✨ AI 正在为你个性化推荐...",
+    "meals": {
+      "breakfast": { "time": "早餐", "fallback": "温补早餐", "tip": "用温热、易消化的食物开始新的一天" },
+      "lunch": { "time": "午餐", "fallback": "均衡午餐", "tip": "包含蛋白质、复合碳水和熟蔬菜" },
+      "dinner": { "time": "晚餐", "fallback": "清淡晚餐", "tip": "晚餐要早吃且清淡，有助于睡眠" }
+    },
+    "scanLink": "🔍 扫描食物，查看是否适合你 →",
+    "exercise": { "title": "🏃 今日运动", "frequency": "频率：", "frequencyText": "30-45分钟，每周4-5次" },
+    "lifestyle": { "title": "💡 生活提示" },
+    "solarTermTitle": "{nameEn}——{nameZh} 养生指南",
+    "solarTermDiet": "饮食：",
+    "solarTermLifestyle": "生活：",
+    "navItems": [
+      { "label": "食物扫描" },
+      { "label": "学习" },
+      { "label": "每日提示" },
+      { "label": "我的资料" }
+    ]
+  },
+  "foodScan": {
+    "title": "食物扫描",
+    "subtitle": "拍照或输入食物名称，查看其中医适配性",
+    "scanCount": "📸 今日扫描：{count} / 3（免费）",
+    "uploadHint": "拍照或上传食物照片",
+    "uploadSubtext": "点击选择图片",
+    "orDivider": "或",
+    "manualTitle": "🔍 输入食物名称",
+    "manualPlaceholder": "例如：红烧肉, 西瓜, 姜茶...",
+    "checkButton": "检查",
+    "checkingButton": "...",
+    "loadingTitle": "正在分析你的食物...",
+    "loadingSubtext": "识别食材和中医属性",
+    "result": {
+      "kcal": "≈{kcal}千卡/份",
+      "alternative": "💡 替代建议",
+      "scanAnother": "扫描其他食物",
+      "askAi": "🤖 问 AI：今日午餐"
+    },
+    "foodNotFound": "未在数据库中找到该食物。请尝试其他名称或上传照片。",
+    "disclaimer": "⚕️ 食物分析仅供教育用途，不构成医疗建议。当前为 MVP 演示模拟结果。生产环境中，AI 视觉分析将提供实时识别。"
+  },
+  "learn": {
+    "title": "学习中医养生",
+    "subtitle": "探索中医智慧——从体质类型到食疗养生。",
+    "quickRef": "速查：体质类型",
+    "readMore": "阅读更多 →",
+    "disclaimer": "⚕️ 所有内容仅供教育用途，不构成医疗建议。如有需要，请咨询合格的中医师或医疗保健提供者。",
+    "categories": [
+      {
+        "title": "体质科普",
+        "subtitle": "Body Constitution",
+        "articles": [
+          { "title": "了解中医九种体质", "summary": "九种体质类型概述及其对健康的意义。", "icon": "🧬" },
+          { "title": "气虚质——当你的电量不足时", "summary": "气虚的迹象、原因及饮食调理策略。", "icon": "💨" },
+          { "title": "阳虚质——寒性体质", "summary": "为什么你总是感觉冷，以及如何从内而外地温暖起来。", "icon": "❄️" },
+          { "title": "阴虚质——内热", "summary": "了解内热以及如何滋阴降火。", "icon": "🔥" }
+        ]
+      },
+      {
+        "title": "常见症状解读",
+        "subtitle": "Symptom Insights",
+        "articles": [
+          { "title": "脑雾：中医视角", "summary": "中医将脑雾视为脾气虚。了解饮食如何影响思维清晰度。", "icon": "🧠" },
+          { "title": "午后疲劳与人体时钟", "summary": "根据中医子午流注，为什么你会在下午2点疲惫不堪。", "icon": "⏰" },
+          { "title": "从中医角度理解腹胀", "summary": "腹胀通常是脾气滞。了解哪些食物有帮助。", "icon": "🫧" },
+          { "title": "失眠：找到你的睡眠类型", "summary": "不同的睡眠问题指向不同的脏腑失衡。", "icon": "🌙" }
+        ]
+      },
+      {
+        "title": "中西医对照",
+        "subtitle": "East Meets West",
+        "articles": [
+          { "title": "中医 vs 西方营养学：对比", "summary": "两种医学范式如何以不同方式看待食物与健康。", "icon": "🔄" },
+          { "title": "中医之脾 vs 西医之脾", "summary": "中医的脾并非同一器官——了解其真正含义。", "icon": "🔬" },
+          { "title": "炎症：中医与西医视角", "summary": "西医的抗炎方法与中医的清热解毒相结合。", "icon": "🔥" },
+          { "title": "肠道健康：同一概念，两种范式", "summary": "中医脾胃理论与现代微生物组研究的契合点。", "icon": "🦠" }
+        ]
+      }
+    ]
+  },
+  "login": {
+    "title": "欢迎",
+    "subtitle": "登录以访问你的个性化健康面板",
+    "nameLabel": "姓名（可选）",
+    "namePlaceholder": "例如：张三",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "your@email.com",
+    "emailHint": "使用任意邮箱登录（MVP 演示）",
+    "submitButton": "登录 →",
+    "loading": "加载中..."
+  },
+  "quiz": {
+    "questionOf": "第 {current} 题，共 {total} 题",
+    "nextButton": "下一题 →",
+    "submitButton": "查看我的结果 →",
+    "analyzingTitle": "正在分析你的回答...",
+    "analyzingSubtext": "结合古老中医智慧与现代 AI"
+  },
+  "quizResult": {
+    "primaryLabel": "你的主要体质",
+    "dietPrinciple": "🥗 饮食原则",
+    "recommendedFoods": "✅ 推荐食物",
+    "avoidFoods": "❌ 避免食物",
+    "exercise": "🏃 运动建议",
+    "lifestyleTips": "💡 生活建议",
+    "secondaryHint": "你也表现出 {nameZh}（{name}）的特征",
+    "viewDashboard": "查看我的面板 →",
+    "shareResult": "📤 分享我的结果",
+    "retakeQuiz": "重新测试",
+    "shareText": "我发现了我的体质类型：{nameZh}（{nameEn}）！🌿 快来测试你的中医体质吧。",
+    "shareTitle": "我的中医体质",
+    "copiedAlert": "结果已复制到剪贴板！"
+  },
+  "profile": {
+    "title": "我的资料",
+    "primaryLabel": "你的主要体质",
+    "retakeQuiz": "重新测试",
+    "bodyData": "📏 身体数据",
+    "bodyDataHint": "可选：你的身体数据有助于我们提供更准确的个性化建议。",
+    "fields": {
+      "height": "身高（厘米）",
+      "heightPlaceholder": "例如：168",
+      "weight": "体重（公斤）",
+      "weightPlaceholder": "例如：62",
+      "age": "年龄",
+      "agePlaceholder": "例如：32",
+      "gender": "性别",
+      "genderPlaceholder": "请选择",
+      "genderMale": "男",
+      "genderFemale": "女",
+      "genderOther": "其他",
+      "exercise": "运动频率",
+      "exercisePlaceholder": "请选择",
+      "exerciseRarely": "几乎不",
+      "exercise1to2": "每周1-2次",
+      "exercise3to5": "每周3-5次",
+      "exerciseDaily": "每天",
+      "sleep": "睡眠时长",
+      "sleepPlaceholder": "请选择",
+      "sleepLess5": "少于5小时",
+      "sleep5to6": "5-6小时",
+      "sleep7to8": "7-8小时",
+      "sleepMore8": "多于8小时"
+    },
+    "saveButton": "保存身体数据",
+    "savedButton": "✅ 已保存！",
+    "quickLinks": "🔗 快捷链接",
+    "links": [
+      { "label": "我的面板", "icon": "🏠" },
+      { "label": "食物扫描", "icon": "📷" },
+      { "label": "每日提示", "icon": "🌅" },
+      { "label": "学习中医", "icon": "📖" }
+    ]
+  },
+  "common": {
+    "toggleMenu": "切换菜单"
+  }
+}

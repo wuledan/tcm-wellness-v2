@@ -92,11 +92,16 @@ export default function QuizResultPage() {
               <div className="bg-red-50 rounded-xl p-4">
                 <h4 className="font-medium text-red-800 text-sm mb-2">❌ Avoid Foods</h4>
                 <div className="flex flex-wrap gap-2">
-                  {constitution.avoid_foods.map((food, i) => (
-                    <span key={i} className="px-2.5 py-1 bg-white rounded-full text-xs text-red-700 border border-red-200">
-                      {food}
-                    </span>
-                  ))}
+                  {constitution.avoid_foods.map((food, i) => {
+                    const foodEn = foodNameZhToEn[food] || food;
+                    const isChinese = foodNameZhToEn[food] !== undefined;
+                    return (
+                      <span key={i} className="inline-flex flex-col items-center px-2.5 py-1 bg-white rounded-full border border-red-200">
+                        <span className="text-[10px] text-red-700 leading-tight">{foodEn}</span>
+                        {isChinese && <span className="text-[9px] text-gray-400 leading-tight">{food}</span>}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             </div>

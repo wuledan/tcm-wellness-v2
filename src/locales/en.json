@@ -1,0 +1,308 @@
+{
+  "header": {
+    "logo": "TCM Wellness",
+    "nav": {
+      "home": "Home",
+      "quiz": "Body Quiz",
+      "dashboard": "Dashboard",
+      "foodScan": "Food Scan",
+      "learn": "Learn",
+      "daily": "Daily"
+    },
+    "auth": {
+      "signIn": "Sign In",
+      "logout": "Logout"
+    }
+  },
+  "footer": {
+    "description": "Food as Medicine, Made Personal. Ancient Chinese wisdom powered by modern AI.",
+    "quickLinks": "Quick Links",
+    "links": {
+      "bodyTypeQuiz": "Body Type Quiz",
+      "foodScanner": "Food Scanner",
+      "learnTcm": "Learn TCM",
+      "dailyWellness": "Daily Wellness",
+      "aboutUs": "About Us"
+    },
+    "legal": "Legal",
+    "legalText": "⚕️ Educational content only. Not medical advice. Always consult with a qualified healthcare provider before making any changes to your diet, exercise, or health regimen. The information provided is for general wellness education purposes only.",
+    "copyright": "© {year} TCM Wellness. All rights reserved."
+  },
+  "home": {
+    "badge": "Ancient Wisdom × Modern AI",
+    "heroTitle": "Food as Medicine, {highlight}Made Personal{/highlight}",
+    "heroSubtitle": "TCM Wellness uses 2,000 years of Traditional Chinese Medicine wisdom — powered by AI — to give you personalized food, exercise, and lifestyle recommendations based on your unique body type.",
+    "ctaQuiz": "Discover Your Body Type",
+    "ctaLearnMore": "Learn More",
+    "problemTitle": "Why Most Wellness Advice {highlight}Doesn't Work for You{/highlight}",
+    "problemSubtitle": "The one-size-fits-all approach ignores a simple truth — every body is different.",
+    "problems": [
+      {
+        "icon": "🥗",
+        "title": "Western Doctors Don't Discuss Food",
+        "description": "Modern medicine rarely addresses how food affects your unique body. You get a prescription, not a food plan."
+      },
+      {
+        "icon": "📱",
+        "title": "Diet Apps Don't Know You",
+        "description": "Generic calorie counting ignores your body type. What works for others may not work for YOUR constitution."
+      },
+      {
+        "icon": "🔒",
+        "title": "2,000 Years of Wisdom, Locked Away",
+        "description": "TCM's personalized food wisdom is ancient, proven, and powerful — yet largely inaccessible in the West."
+      }
+    ],
+    "whyTcmTitle": "Why TCM Food Therapy?",
+    "whyTcmSubtitle": "Two thousand years of personalized medicine meets modern AI.",
+    "westernTitle": "Western Nutrition",
+    "westernItems": [
+      "Focuses on calories, macros, and standardized nutrients",
+      "Same guidelines for everyone — one size fits all",
+      "Reductionist: food is broken down into isolated components",
+      "Treats symptoms after they appear"
+    ],
+    "tcmTitle": "TCM Food Therapy",
+    "tcmItems": [
+      "Focuses on food nature (cold/cool/neutral/warm/hot) and your body type",
+      "Personalized: 9 body types, each with unique dietary needs",
+      "Holistic: food affects your entire system, energy, and balance",
+      "Preventative: eat to maintain balance before illness arises"
+    ],
+    "foodExampleTitle": "Same food, different body types, different answers",
+    "foodExampleSubtitle": "同一食物，不同体质，不同答案",
+    "foodExampleItems": [
+      { "emoji": "❄️", "constitution": "阳虚质 (Yang Deficiency)", "verdict": "✅ 适合", "color": "text-blue-600" },
+      { "emoji": "🔥", "constitution": "阴虚质 (Yin Deficiency)", "verdict": "⚠️ 谨慎", "color": "text-red-600" },
+      { "emoji": "☀️", "constitution": "湿热质 (Damp-Heat)", "verdict": "❌ 避免", "color": "text-amber-600" }
+    ],
+    "howItWorksTitle": "How It Works",
+    "howItWorksSubtitle": "Your personalized wellness journey in four simple steps.",
+    "steps": [
+      { "number": "01", "title": "Know Your Body", "description": "Take our 2-minute quiz to discover your TCM body type." },
+      { "number": "02", "title": "Scan Your Food", "description": "Snap a photo of any meal. AI analyzes its TCM properties for your body." },
+      { "number": "03", "title": "Get Your Plan", "description": "Receive personalized diet, exercise, and lifestyle recommendations." },
+      { "number": "04", "title": "Track Progress", "description": "Monitor changes and refine your wellness journey over time." }
+    ],
+    "stats": [
+      { "value": "9", "label": "Body Types" },
+      { "value": "500+", "label": "Food Mappings" },
+      { "value": "24", "label": "Solar Terms" },
+      { "value": "AI", "label": "Powered" }
+    ],
+    "ctaTitle": "Ready to Discover Your Body Type?",
+    "ctaText": "Take our 2-minute body constitution quiz and unlock personalized wellness recommendations based on your unique body type.",
+    "ctaButton": "Start the Quiz"
+  },
+  "about": {
+    "heroTitle": "Are you struggling with brain fog, afternoon fatigue, and unexplained weight gain?",
+    "heroText": "You've tried every diet, every wellness trend — but the results are always temporary. What if the answer isn't a new diet, but an ancient wisdom that sees your body as unique?",
+    "stage1Label": "Stage 1 · The Problem",
+    "stage1Title": "Modern Life, Modern Problems",
+    "stage1Items": [
+      { "icon": "🧠", "title": "Brain Fog", "desc": "Can't focus by 2 PM? Your digestion might be pulling energy from your brain." },
+      { "icon": "😴", "title": "Afternoon Fatigue", "desc": "Feeling drained after lunch? Your body is struggling to process what you ate." },
+      { "icon": "⚖️", "title": "Weight Struggles", "desc": "Every diet works for others but not for you? Your body type needs a different approach." }
+    ],
+    "stage2Label": "Stage 2 · Why Western Methods Fall Short",
+    "stage2Title": "Tried every method but results are temporary?",
+    "stage2Text1": "Modern wellness treats symptoms, not root causes. It prescribes the same solution for everyone — counting calories, cutting carbs, eating less — without asking the most important question:",
+    "stage2Quote": "“What is YOUR body type?”",
+    "stage2Text2": "Western nutrition sees food as numbers. TCM sees food as energy — warming or cooling, nourishing or draining — that interacts differently with every unique body.",
+    "stage3Label": "Stage 3 · The Solution",
+    "stage3Title": "Let's try 2,000 years of accumulated Chinese wisdom — for your body, uniquely.",
+    "stage3Text1": "TCM (Traditional Chinese Medicine) has been personalized medicine for over two millennia. Its core insight is simple but profound: every person has a unique body constitution, and what heals one person may harm another.",
+    "stage3Text2": "Our AI-powered platform brings this ancient wisdom to your fingertips:",
+    "stage3Items": [
+      { "icon": "🧬", "text": "Discover your unique TCM body type in 2 minutes" },
+      { "icon": "📸", "text": "Scan any food to see if it's right for YOUR body" },
+      { "icon": "🥗", "text": "Get personalized meal, exercise, and lifestyle plans" },
+      { "icon": "🌍", "text": "Available in English and Chinese" }
+    ],
+    "ctaTitle": "Ready to understand your body?",
+    "ctaText": "2,000 years of wisdom. 2 minutes of your time. A lifetime of better wellness.",
+    "ctaButton": "Discover Your Body Type"
+  },
+  "daily": {
+    "title": "Daily Wellness",
+    "subtitle": "Your daily dose of TCM wisdom",
+    "dayOf": "Day {day} of 7",
+    "tipTitle": "Daily Wellness Tip",
+    "forYourBodyType": "For your {name} body type: ",
+    "tips": [
+      "Start your morning with a glass of warm water with lemon to gently awaken your digestive system.",
+      "Try eating your largest meal at lunch when your digestive fire (Spleen Qi) is strongest, between 11am-1pm.",
+      "Practice deep belly breathing for 5 minutes before meals to activate your parasympathetic nervous system.",
+      "Chew each bite 20-30 times — digestion begins in the mouth. Your Spleen will thank you.",
+      "Avoid iced drinks with meals. Cold liquids dampen digestive fire. Opt for warm tea or room temperature water.",
+      "Take a 10-minute walk after lunch to support blood sugar balance and energy flow.",
+      "Eat dinner at least 3 hours before bed to allow proper digestion before sleep."
+    ],
+    "solarTerm": {
+      "currentLabel": "Current Solar Term",
+      "dietaryAdvice": "🥗 Dietary Advice",
+      "lifestyleAdvice": "🧘 Lifestyle Advice",
+      "calendarTitle": "📅 24 Solar Terms Calendar"
+    }
+  },
+  "dashboard": {
+    "title": "Your Personalized Wellness Dashboard",
+    "mealSuggestions": "🥗 Today's Meal Suggestions",
+    "aiLoading": "✨ AI is personalizing your recommendations...",
+    "meals": {
+      "breakfast": { "time": "Breakfast", "fallback": "Warm Nourishing Breakfast", "tip": "Start your day with warm, easily digestible foods" },
+      "lunch": { "time": "Lunch", "fallback": "Balanced Midday Meal", "tip": "Include a protein, complex carb, and cooked vegetables" },
+      "dinner": { "time": "Dinner", "fallback": "Light Evening Meal", "tip": "Eat dinner early and keep it light for better sleep" }
+    },
+    "scanLink": "🔍 Scan a food to check if it's right for you →",
+    "exercise": { "title": "🏃 Today's Exercise", "frequency": "Frequency:", "frequencyText": "30-45 minutes, 4-5 times per week" },
+    "lifestyle": { "title": "💡 Lifestyle Tips" },
+    "solarTermTitle": "{nameEn} — {nameZh} Wellness Guide",
+    "solarTermDiet": "Diet: ",
+    "solarTermLifestyle": "Lifestyle: ",
+    "navItems": [
+      { "label": "Food Scan" },
+      { "label": "Learn" },
+      { "label": "Daily Tips" },
+      { "label": "My Profile" }
+    ]
+  },
+  "foodScan": {
+    "title": "Food Scanner",
+    "subtitle": "Snap a photo or type a food name to check its TCM compatibility",
+    "scanCount": "📸 Today's scans: {count} / 3 (Free)",
+    "uploadHint": "Take or upload a food photo",
+    "uploadSubtext": "Click to select an image",
+    "orDivider": "OR",
+    "manualTitle": "🔍 Type a food name",
+    "manualPlaceholder": "e.g. 红烧肉, 西瓜, 姜茶...",
+    "checkButton": "Check",
+    "checkingButton": "...",
+    "loadingTitle": "Analyzing your food...",
+    "loadingSubtext": "Identifying ingredients and TCM properties",
+    "result": {
+      "kcal": "≈{kcal}kcal per serving",
+      "alternative": "💡 Alternative Suggestion",
+      "scanAnother": "Scan Another",
+      "askAi": "🤖 Ask AI: Today's Lunch"
+    },
+    "foodNotFound": "Food not found in our database. Try a different name or upload a photo.",
+    "disclaimer": "⚕️ Food analysis is for educational purposes only. Not medical advice. Results are simulated for MVP demo. In production, AI vision analysis provides real-time identification."
+  },
+  "learn": {
+    "title": "Learn TCM Wellness",
+    "subtitle": "Explore the wisdom of Traditional Chinese Medicine — from body constitution types to dietary therapy and beyond.",
+    "quickRef": "Quick Reference: Body Types",
+    "readMore": "Read more →",
+    "disclaimer": "⚕️ All content is for educational purposes only. Not medical advice. Consult a qualified TCM practitioner or healthcare provider for personalized guidance.",
+    "categories": [
+      {
+        "title": "Body Constitution",
+        "subtitle": "体质科普",
+        "articles": [
+          { "title": "Understanding the 9 Body Types in TCM", "summary": "An overview of the nine constitution types and what they mean for your health.", "icon": "🧬" },
+          { "title": "气虚质 (Qi Deficiency) — When Your Battery is Low", "summary": "Signs, causes, and dietary strategies for Qi deficiency.", "icon": "💨" },
+          { "title": "阳虚质 (Yang Deficiency) — The Cold Body Type", "summary": "Why you feel cold all the time and how to warm up from within.", "icon": "❄️" },
+          { "title": "阴虚质 (Yin Deficiency) — The Heat Inside", "summary": "Understanding internal heat and how to cool and nourish your body.", "icon": "🔥" }
+        ]
+      },
+      {
+        "title": "Symptom Insights",
+        "subtitle": "常见症状解读",
+        "articles": [
+          { "title": "Brain Fog: A TCM Perspective", "summary": "TCM views brain fog as a Spleen Qi deficiency. Learn how diet affects mental clarity.", "icon": "🧠" },
+          { "title": "Afternoon Fatigue & The Body Clock", "summary": "Why you crash at 2 PM according to the TCM organ clock.", "icon": "⏰" },
+          { "title": "Understanding Bloating from a TCM View", "summary": "Bloating is often Spleen Qi stagnation. Discover which foods help.", "icon": "🫧" },
+          { "title": "Insomnia: Finding Your Sleep Type", "summary": "Different sleep issues point to different organ imbalances in TCM.", "icon": "🌙" }
+        ]
+      },
+      {
+        "title": "East Meets West",
+        "subtitle": "中西医对照",
+        "articles": [
+          { "title": "TCM vs. Western Nutrition: A Comparison", "summary": "How two medical paradigms approach food and health differently.", "icon": "🔄" },
+          { "title": "The Spleen in TCM vs. Western Medicine", "summary": "The TCM Spleen is not the same organ — here's what it really means.", "icon": "🔬" },
+          { "title": "Inflammation: A TCM and Western View", "summary": "Western anti-inflammatory meets TCM heat-clearing approaches.", "icon": "🔥" },
+          { "title": "Gut Health: One Concept, Two Paradigms", "summary": "How TCM Spleen-Stomach theory aligns with modern microbiome research.", "icon": "🦠" }
+        ]
+      }
+    ]
+  },
+  "login": {
+    "title": "Welcome",
+    "subtitle": "Sign in to access your personalized wellness dashboard",
+    "nameLabel": "Name (optional)",
+    "namePlaceholder": "e.g. Alex",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "emailHint": "Use any email to sign in (MVP demo)",
+    "submitButton": "Sign In →",
+    "loading": "Loading..."
+  },
+  "quiz": {
+    "questionOf": "Question {current} of {total}",
+    "nextButton": "Next →",
+    "submitButton": "See My Results →",
+    "analyzingTitle": "Analyzing Your Responses...",
+    "analyzingSubtext": "Consulting ancient TCM wisdom with modern AI"
+  },
+  "quizResult": {
+    "primaryLabel": "Your Primary Body Type",
+    "dietPrinciple": "🥗 Diet Principle",
+    "recommendedFoods": "✅ Recommended Foods",
+    "avoidFoods": "❌ Avoid Foods",
+    "exercise": "🏃 Exercise Recommendation",
+    "lifestyleTips": "💡 Lifestyle Tips",
+    "secondaryHint": "You also show characteristics of {name} ({nameZh})",
+    "viewDashboard": "View My Dashboard →",
+    "shareResult": "📤 Share My Result",
+    "retakeQuiz": "Retake Quiz",
+    "shareText": "I discovered my body type: {nameEn} ({nameZh})! 🌿 Take the TCM body type quiz and discover yours.",
+    "shareTitle": "My TCM Body Type",
+    "copiedAlert": "Result copied to clipboard!"
+  },
+  "profile": {
+    "title": "My Profile",
+    "primaryLabel": "Your primary body constitution",
+    "retakeQuiz": "Retake Quiz",
+    "bodyData": "📏 Body Data",
+    "bodyDataHint": "Optional: Your body data helps us provide more accurate personalized recommendations.",
+    "fields": {
+      "height": "Height (cm)",
+      "heightPlaceholder": "e.g. 168",
+      "weight": "Weight (kg)",
+      "weightPlaceholder": "e.g. 62",
+      "age": "Age",
+      "agePlaceholder": "e.g. 32",
+      "gender": "Gender",
+      "genderPlaceholder": "Select",
+      "genderMale": "Male",
+      "genderFemale": "Female",
+      "genderOther": "Other",
+      "exercise": "Exercise Frequency",
+      "exercisePlaceholder": "Select",
+      "exerciseRarely": "几乎不 (Rarely)",
+      "exercise1to2": "每周1-2次 (1-2/week)",
+      "exercise3to5": "每周3-5次 (3-5/week)",
+      "exerciseDaily": "每天 (Daily)",
+      "sleep": "Sleep Duration",
+      "sleepPlaceholder": "Select",
+      "sleepLess5": "少于5小时 (<5h)",
+      "sleep5to6": "5-6小时",
+      "sleep7to8": "7-8小时",
+      "sleepMore8": "多于8小时 (>8h)"
+    },
+    "saveButton": "Save Body Data",
+    "savedButton": "✅ Saved!",
+    "quickLinks": "🔗 Quick Links",
+    "links": [
+      { "label": "My Dashboard", "icon": "🏠" },
+      { "label": "Food Scanner", "icon": "📷" },
+      { "label": "Daily Tips", "icon": "🌅" },
+      { "label": "Learn TCM", "icon": "📖" }
+    ]
+  },
+  "common": {
+    "toggleMenu": "Toggle menu"
+  }
+}
