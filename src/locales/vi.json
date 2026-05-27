@@ -458,5 +458,38 @@
   },
   "common": {
     "toggleMenu": "Chuyển đổi menu"
+  },
+  "feedback": {
+    "button": "💬 Phản hồi",
+    "title": "Chia sẻ ý kiến của bạn",
+    "subtitle": "Giúp chúng tôi cải thiện TCM Wellness. Ý kiến của bạn định hình tương lai.",
+    "rating": "Đánh giá",
+    "category": "Danh mục",
+    "categories": {
+      "bug": "🐛 Báo lỗi",
+      "feature": "💡 Đề xuất tính năng",
+      "praise": "❤️ Khen ngợi",
+      "other": "📝 Khác"
+    },
+    "message": "Tin nhắn",
+    "messagePlaceholder": "Cho chúng tôi biết suy nghĩ của bạn... (tối thiểu 10 ký tự)",
+    "email": "Email (tùy chọn, để theo dõi)",
+    "emailPlaceholder": "your@email.com",
+    "submit": "Gửi phản hồi",
+    "submitting": "Đang gửi...",
+    "success": "Cảm ơn! Phản hồi của bạn đã được ghi nhận. 🌿",
+    "error": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "close": "Đóng"
+  },
+  "admin": {
+    "title": "Phản hồi người dùng",
+    "empty": "Chưa có phản hồi nào.",
+    "rating": "Đánh giá",
+    "category": "Danh mục",
+    "message": "Nội dung",
+    "email": "Email",
+    "time": "Thời gian",
+    "page": "Trang",
+    "back": "← Về trang chủ"
   }
 }

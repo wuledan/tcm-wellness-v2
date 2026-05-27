@@ -5,6 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FeedbackWrapper from "@/components/FeedbackWrapper";
 
 export const metadata: Metadata = {
   title: "TCM Wellness — Food as Medicine, Made Personal",
@@ -24,6 +25,7 @@ export default function RootLayout({
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
+            <FeedbackWrapper />
           </LanguageProvider>
         </SessionProvider>
         <Analytics />

@@ -458,5 +458,38 @@
   },
   "common": {
     "toggleMenu": "切换菜单"
+  },
+  "feedback": {
+    "button": "💬 反馈",
+    "title": "分享您的反馈",
+    "subtitle": "帮助我们改进 TCM Wellness。您的意见塑造我们的未来。",
+    "rating": "您的评分",
+    "category": "分类",
+    "categories": {
+      "bug": "🐛 报告问题",
+      "feature": "💡 功能建议",
+      "praise": "❤️ 好评",
+      "other": "📝 其他"
+    },
+    "message": "您的留言",
+    "messagePlaceholder": "告诉我们您的想法...（至少 10 个字）",
+    "email": "邮箱（可选，用于后续回复）",
+    "emailPlaceholder": "your@email.com",
+    "submit": "提交反馈",
+    "submitting": "发送中...",
+    "success": "感谢！您的反馈已收到。🌿",
+    "error": "提交失败，请重试。",
+    "close": "关闭"
+  },
+  "admin": {
+    "title": "用户反馈",
+    "empty": "暂无反馈提交。",
+    "rating": "评分",
+    "category": "分类",
+    "message": "留言",
+    "email": "邮箱",
+    "time": "时间",
+    "page": "页面",
+    "back": "← 返回首页"
   }
 }

@@ -458,5 +458,38 @@
   },
   "common": {
     "toggleMenu": "메뉴 토글"
+  },
+  "feedback": {
+    "button": "💬 피드백",
+    "title": "의견을 들려주세요",
+    "subtitle": "TCM Wellness 개선을 도와주세요. 여러분의 의견이 미래를 만듭니다.",
+    "rating": "평점",
+    "category": "카테고리",
+    "categories": {
+      "bug": "🐛 버그 신고",
+      "feature": "💡 기능 제안",
+      "praise": "❤️ 칭찬",
+      "other": "📝 기타"
+    },
+    "message": "의견",
+    "messagePlaceholder": "의견을 적어주세요... (최소 10자)",
+    "email": "이메일 (선택, 후속 답변용)",
+    "emailPlaceholder": "your@email.com",
+    "submit": "피드백 제출",
+    "submitting": "전송 중...",
+    "success": "감사합니다! 피드백이 접수되었습니다. 🌿",
+    "error": "오류가 발생했습니다. 다시 시도해주세요.",
+    "close": "닫기"
+  },
+  "admin": {
+    "title": "사용자 피드백",
+    "empty": "아직 제출된 피드백이 없습니다.",
+    "rating": "평점",
+    "category": "카테고리",
+    "message": "내용",
+    "email": "이메일",
+    "time": "시간",
+    "page": "페이지",
+    "back": "← 홈으로"
   }
 }

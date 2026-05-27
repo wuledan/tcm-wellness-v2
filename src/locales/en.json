@@ -470,5 +470,38 @@
   },
   "common": {
     "toggleMenu": "Toggle menu"
+  },
+  "feedback": {
+    "button": "💬 Feedback",
+    "title": "Share Your Feedback",
+    "subtitle": "Help us improve TCM Wellness. Your input shapes our future.",
+    "rating": "Your Rating",
+    "category": "Category",
+    "categories": {
+      "bug": "🐛 Bug Report",
+      "feature": "💡 Feature Request",
+      "praise": "❤️ Praise",
+      "other": "📝 Other"
+    },
+    "message": "Your Message",
+    "messagePlaceholder": "Tell us what you think... (min 10 characters)",
+    "email": "Email (optional, for follow-up)",
+    "emailPlaceholder": "your@email.com",
+    "submit": "Submit Feedback",
+    "submitting": "Sending...",
+    "success": "Thank you! Your feedback has been received. 🌿",
+    "error": "Something went wrong. Please try again.",
+    "close": "Close"
+  },
+  "admin": {
+    "title": "User Feedback",
+    "empty": "No feedback submissions yet.",
+    "rating": "Rating",
+    "category": "Category",
+    "message": "Message",
+    "email": "Email",
+    "time": "Time",
+    "page": "Page",
+    "back": "← Back to Home"
   }
 }
