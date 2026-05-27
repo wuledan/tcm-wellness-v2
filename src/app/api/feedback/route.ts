@@ -1,61 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readFileSync, writeFileSync, appendFileSync, existsSync, mkdirSync } from "fs";
-import { join } from "path";
-
-interface FeedbackEntry {
-  id: string;
-  rating: number;
-  category: string;
-  message: string;
-  email?: string;
-  page: string;
-  timestamp: string;
-}
-
-// In-memory store for fast access
-let feedbackStore: FeedbackEntry[] | null = null;
-const TMP_FILE = "/tmp/tcm-feedback.jsonl";
-
-function loadFromDisk(): FeedbackEntry[] {
-  try {
-    if (existsSync(TMP_FILE)) {
-      const raw = readFileSync(TMP_FILE, "utf-8");
-      return raw
-        .split("\n")
-        .filter((line) => line.trim())
-        .map((line) => JSON.parse(line));
-    }
-  } catch {
-    // ignore read errors
-  }
-  return [];
-}
-
-function ensureDir() {
-  try {
-    if (!existsSync("/tmp")) mkdirSync("/tmp", { recursive: true });
-  } catch {
-    // ignore
-  }
-}
-
-function getStore(): FeedbackEntry[] {
-  if (!feedbackStore) {
-    feedbackStore = loadFromDisk();
-  }
-  return feedbackStore;
-}
-
-function addEntry(entry: FeedbackEntry) {
-  const store = getStore();
-  store.push(entry);
-  ensureDir();
-  try {
-    appendFileSync(TMP_FILE, JSON.stringify(entry) + "\n");
-  } catch {
-    // ignore disk write errors
-  }
-}
+import { addFeedback, readFeedback } from "@/lib/feedback";
 
 export async function POST(request: NextRequest) {
   try {
@@ -79,7 +23,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    const entry: FeedbackEntry = {
+    const entry = {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
       rating,
       category,
@@ -89,7 +33,7 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     };
 
-    addEntry(entry);
+    await addFeedback(entry);
 
     // Also log for Vercel log drain
     console.log("[FEEDBACK]", JSON.stringify(entry));
@@ -101,8 +45,8 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET() {
-  const store = getStore();
+  const entries = await readFeedback();
   // Return newest first
-  const sorted = [...store].reverse();
+  const sorted = [...entries].reverse();
   return NextResponse.json({ feedback: sorted, total: sorted.length });
 }
