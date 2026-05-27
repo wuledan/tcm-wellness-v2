@@ -11,7 +11,8 @@ export type Locale = "en" | "zh" | "ko" | "vi";
 interface LanguageContextType {
   locale: Locale;
   setLocale: (locale: Locale) => void;
-  t: (key: string) => string;
+  /** Returns translated string for leaf paths, or array/object for nested data */
+  t: (key: string) => any;
 }
 
 const translationsMap: Record<Locale, Record<string, any>> = { en, zh, ko, vi };
@@ -22,7 +23,7 @@ const LanguageContext = createContext<LanguageContextType>({
   t: (key: string) => key,
 });
 
-function getNested(obj: Record<string, any>, path: string): string {
+function getNested(obj: Record<string, any>, path: string): any {
   const keys = path.split(".");
   let current: any = obj;
   for (const key of keys) {
@@ -30,7 +31,7 @@ function getNested(obj: Record<string, any>, path: string): string {
     current = current[key];
     if (current === undefined) return path;
   }
-  return typeof current === "string" ? current : path;
+  return current;
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {

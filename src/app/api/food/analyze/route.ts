@@ -71,7 +71,6 @@ Return ONLY valid JSON in this exact format (no markdown, no code fences):
         ],
         temperature: 0.3,
         max_tokens: 600,
-        reasoning_effort: "disabled",
         response_format: { type: "json_object" },
       }),
     });
