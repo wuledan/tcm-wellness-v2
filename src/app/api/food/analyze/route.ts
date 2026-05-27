@@ -1,18 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_KEY = "sk-f0T5tXizIYzrLDB5L5kDJ0pwpfqdoRNxqE22aopWktYwYEdIFaVHMSuQ10f9ahJC";
-const API_BASE = "https://opencode.ai/zen/go/v1";
+const QWEN_API_KEY = "sk-16d61d52eba94add8bd6968c8c744df6";
+const QWEN_API_BASE = "https://dashscope.aliyuncs.com/compatible-mode/v1";
 
-const SYSTEM_PROMPT = `You are a TCM (Traditional Chinese Medicine) food analysis expert. Analyze food images and provide TCM property classification and constitution compatibility assessment.
-
-TCM food properties: cold (寒), cool (凉), neutral (平), warm (温), hot (热).
-
-Match levels:
-- "suitable": The food's TCM property complements or balances the user's constitution.
-- "caution": The food may have mild conflict with the constitution; small amounts are OK.
-- "avoid": The food's property conflicts significantly with the constitution.
-
-Always provide a suitable alternative food suggestion.`;
+const DS_API_KEY = "sk-f0T5tXizIYzrLDB5L5kDJ0pwpfqdoRNxqE22aopWktYwYEdIFaVHMSuQ10f9ahJC";
+const DS_API_BASE = "https://opencode.ai/zen/go/v1";
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,81 +15,122 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No image provided" }, { status: 400 });
     }
 
-    const langMap: Record<string, string> = {
-      en: "English",
-      zh: "Chinese",
-      ko: "Korean",
-      vi: "Vietnamese",
-    };
+    const langMap: Record<string, string> = { en: "English", zh: "Chinese", ko: "Korean", vi: "Vietnamese" };
     const replyLang = langMap[language] || "English";
 
-    const userPrompt = `Analyze this food image for a person with constitution type "${constitutionType || "balanced"}".
-
-IMPORTANT: Reply in ${replyLang}.
-
-Return ONLY valid JSON in this exact format (no markdown, no code fences):
-{
-  "food_name": "food name (in ${replyLang})",
-  "food_name_zh": "食物中文名",
-  "estimated_calories": 550,
-  "tcm_property": "warm",
-  "tcm_property_zh": "温",
-  "match_level": "avoid",
-  "reason_en": "explanation in ${replyLang} (2-3 sentences)",
-  "reason_zh": "2-3句中文分析说明",
-  "alternative_name": "alternative food name (in ${replyLang})",
-  "alternative_name_zh": "清蒸鱼",
-  "alternative_property": "neutral",
-  "alternative_match": "suitable"
-}`;
-
-    const response = await fetch(`${API_BASE}/chat/completions`, {
+    // ========== Step 1: Identify food via Qwen-VL-Plus (Vision) ==========
+    const visionResponse = await fetch(`${QWEN_API_BASE}/chat/completions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${API_KEY}`,
+        Authorization: `Bearer ${QWEN_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "deepseek-v4-flash",
+        model: "qwen-vl-plus",
         messages: [
-          { role: "system", content: SYSTEM_PROMPT },
           {
             role: "user",
             content: [
-              { type: "text", text: userPrompt },
-              { type: "image_url", image_url: { url: image, detail: "low" } },
+              {
+                type: "text",
+                text: `Identify the main food or dish in this image. 
+Respond in JSON ONLY (no markdown, no code fences):
+{"name_en":"food name in English","name_zh":"食物中文名","description":"brief description of how it looks","estimated_calories_per_100g":number}`,
+              },
+              { type: "image_url", image_url: { url: image } },
             ],
           },
         ],
+        max_tokens: 300,
+        temperature: 0.1,
+      }),
+    });
+
+    if (!visionResponse.ok) {
+      const errText = await visionResponse.text();
+      console.error("Vision API error:", visionResponse.status, errText);
+      return NextResponse.json({ error: "Food recognition failed" }, { status: 502 });
+    }
+
+    const visionData = await visionResponse.json();
+    const visionContent = visionData.choices?.[0]?.message?.content || "{}";
+
+    // Parse food info, stripping any markdown code fences
+    const cleaned = visionContent.replace(/```json\s*/g, "").replace(/```\s*/g, "").trim();
+    let foodInfo: Record<string, any>;
+    try {
+      foodInfo = JSON.parse(cleaned);
+    } catch {
+      // Fallback: extract name_en from raw text
+      const match = cleaned.match(/"name_en"\s*:\s*"([^"]+)"/);
+      foodInfo = { name_en: match?.[1] || "Unknown", name_zh: "", estimated_calories_per_100g: 100 };
+    }
+
+    // ========== Step 2: TCM Analysis via DeepSeek V4 Flash ==========
+    const constitutionLabel = constitutionType || "balanced";
+    const tcmPrompt = `You are a TCM food expert. Analyze this food for a ${constitutionLabel} constitution.
+
+Food identified: ${foodInfo.name_en} (${foodInfo.name_zh || ""})
+Estimated calories: ~${foodInfo.estimated_calories_per_100g || 100}kcal/100g
+
+Respond in ${replyLang}. Return ONLY valid JSON:
+{
+  "tcm_property": "cold|cool|neutral|warm|hot",
+  "tcm_property_zh": "寒|凉|平|温|热",
+  "match_level": "suitable|caution|avoid",
+  "reason_en": "explanation in ${replyLang} (2-3 sentences)",
+  "reason_zh": "2-3句中文分析",
+  "alternative_name": "better alternative food in ${replyLang}",
+  "alternative_name_zh": "中文替代食物名",
+  "alternative_property": "cold|cool|neutral|warm|hot",
+  "alternative_match": "suitable|caution|avoid"
+}`;
+
+    const tcmResponse = await fetch(`${DS_API_BASE}/chat/completions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${DS_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "deepseek-v4-flash",
+        messages: [{ role: "user", content: tcmPrompt }],
         temperature: 0.3,
         max_tokens: 600,
         response_format: { type: "json_object" },
       }),
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("AI Vision API error:", response.status, errorText);
-      return NextResponse.json({ error: "AI analysis failed" }, { status: 502 });
+    if (!tcmResponse.ok) {
+      const errText = await tcmResponse.text();
+      console.error("TCM API error:", tcmResponse.status, errText);
+      return NextResponse.json({ error: "TCM analysis failed" }, { status: 502 });
     }
 
-    const data = await response.json();
-    const content = data.choices[0].message.content;
-    const result = JSON.parse(content);
+    const tcmData = await tcmResponse.json();
+    const tcmContent = tcmData.choices?.[0]?.message?.content || "{}";
 
+    let tcmResult: Record<string, any>;
+    try {
+      tcmResult = JSON.parse(tcmContent);
+    } catch {
+      return NextResponse.json({ error: "Failed to parse TCM analysis" }, { status: 500 });
+    }
+
+    // ========== Combine results ==========
     return NextResponse.json({
-      food_name: result.food_name || "Unknown Food",
-      food_name_zh: result.food_name_zh || "未知食物",
-      estimated_calories: result.estimated_calories || 100,
-      tcm_property: result.tcm_property || "neutral",
-      tcm_property_zh: result.tcm_property_zh || "平",
-      match_level: result.match_level || "caution",
-      reason_en: result.reason_en || "",
-      reason_zh: result.reason_zh || "",
-      alternative_name: result.alternative_name || "",
-      alternative_name_zh: result.alternative_name_zh || "",
-      alternative_property: result.alternative_property || "neutral",
-      alternative_match: result.alternative_match || "suitable",
+      food_name: foodInfo.name_en || "Unknown Food",
+      food_name_zh: foodInfo.name_zh || "未知食物",
+      estimated_calories: foodInfo.estimated_calories_per_100g || 100,
+      tcm_property: tcmResult.tcm_property || "neutral",
+      tcm_property_zh: tcmResult.tcm_property_zh || "平",
+      match_level: tcmResult.match_level || "caution",
+      reason_en: tcmResult.reason_en || "",
+      reason_zh: tcmResult.reason_zh || "",
+      alternative_name: tcmResult.alternative_name || "",
+      alternative_name_zh: tcmResult.alternative_name_zh || "",
+      alternative_property: tcmResult.alternative_property || "neutral",
+      alternative_match: tcmResult.alternative_match || "suitable",
     });
   } catch (error) {
     console.error("Food analysis error:", error);
