@@ -319,15 +319,19 @@ export default function FoodScanPage() {
             </button>
           </div>
           <div className="flex flex-wrap gap-1.5 mt-3">
-            {Object.keys(foodDB).slice(0, 8).map((name) => (
-              <button
-                key={name}
-                onClick={() => { setManualFood(name); }}
-                className="px-2 py-0.5 bg-gray-100 text-gray-500 text-xs rounded-full hover:bg-gray-200 transition-colors"
-              >
-                {name}
-              </button>
-            ))}
+            {Object.keys(foodDB).slice(0, 8).map((name) => {
+              const entry = foodDB[name];
+              return (
+                <button
+                  key={name}
+                  onClick={() => { setManualFood(name); }}
+                  className="inline-flex flex-col items-center px-2 py-0.5 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
+                >
+                  <span className="text-[10px] text-gray-600 leading-tight">{entry.nameEn}</span>
+                  <span className="text-[9px] text-gray-400 leading-tight">{name}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { constitutions } from "@/data/constitutions";
 import { getQuizResult } from "@/lib/utils";
+import { foodNameZhToEn } from "@/data/foods";
 
 export default function QuizResultPage() {
   const router = useRouter();
@@ -76,11 +77,16 @@ export default function QuizResultPage() {
               <div className="bg-green-50 rounded-xl p-4">
                 <h4 className="font-medium text-green-800 text-sm mb-2">✅ Recommended Foods</h4>
                 <div className="flex flex-wrap gap-2">
-                  {constitution.recommended_foods.map((food, i) => (
-                    <span key={i} className="px-2.5 py-1 bg-white rounded-full text-xs text-green-700 border border-green-200">
-                      {food}
-                    </span>
-                  ))}
+                  {constitution.recommended_foods.map((food, i) => {
+                    const foodEn = foodNameZhToEn[food] || food;
+                    const isChinese = foodNameZhToEn[food] !== undefined;
+                    return (
+                      <span key={i} className="inline-flex flex-col items-center px-2.5 py-1 bg-white rounded-full border border-green-200">
+                        <span className="text-[10px] text-green-700 leading-tight">{foodEn}</span>
+                        {isChinese && <span className="text-[9px] text-gray-400 leading-tight">{food}</span>}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
               <div className="bg-red-50 rounded-xl p-4">

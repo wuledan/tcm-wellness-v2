@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { constitutions } from "@/data/constitutions";
 import { getCurrentSolarTerm } from "@/data/solarTerms";
 import { getQuizResult } from "@/lib/utils";
+import { foodNameZhToEn } from "@/data/foods";
 
 interface AiMeal {
   name: string;
@@ -189,11 +190,16 @@ export default function DashboardPage() {
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-1.5 mb-3">
-                    {meal.foods.map((food, j) => (
-                      <span key={j} className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-xs rounded-full border border-emerald-200">
-                        {food}
-                      </span>
-                    ))}
+                    {meal.foods.map((food, j) => {
+                      const foodEn = foodNameZhToEn[food] || food;
+                      const isChinese = foodNameZhToEn[food] !== undefined;
+                      return (
+                        <span key={j} className="inline-flex flex-col items-center px-2.5 py-1 bg-emerald-50 rounded-full border border-emerald-200">
+                          <span className="text-[10px] text-emerald-700 leading-tight">{foodEn}</span>
+                          {isChinese && <span className="text-[9px] text-gray-400 leading-tight">{food}</span>}
+                        </span>
+                      );
+                    })}
                   </div>
                   <p className="text-xs text-gray-400">{meal.tip}</p>
                   {mealDescZh && (
