@@ -151,7 +151,7 @@ export default function DashboardPage() {
               <span className="text-4xl">{constitution.emoji}</span>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">
-                  {constitution.name_zh} · {constitution.name_en}
+                  {constitution.name_en} · {constitution.name_zh}
                 </h1>
                 <p className="text-gray-400 text-sm">Your Personalized Wellness Dashboard</p>
               </div>

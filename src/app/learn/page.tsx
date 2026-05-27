@@ -145,8 +145,8 @@ export default function LearnPage() {
         {/* Article categories */}
         {articles.map((section) => (
           <section key={section.category} className="mb-10">
-            <h2 className="text-xl font-semibold text-gray-900 mb-1">{section.category}</h2>
-            <p className="text-sm text-gray-400 mb-4">{section.category_en}</p>
+            <h2 className="text-xl font-semibold text-gray-900 mb-1">{section.category_en}</h2>
+            <p className="text-sm text-gray-400 mb-4">{section.category}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {section.items.map((article, i) => (
                 <div

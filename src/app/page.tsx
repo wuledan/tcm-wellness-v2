@@ -152,8 +152,8 @@ export default function HomePage() {
 
           {/* Food example card */}
           <div className="bg-white rounded-2xl p-8 border border-gray-100 max-w-3xl mx-auto">
-            <h3 className="text-center font-medium text-gray-900 mb-6">同一食物，不同体质，不同答案</h3>
-            <p className="text-center text-gray-500 text-sm mb-6">Same food, different body types, different answers</p>
+            <h3 className="text-center font-medium text-gray-900 mb-6">Same food, different body types, different answers</h3>
+            <p className="text-center text-gray-500 text-sm mb-6">同一食物，不同体质，不同答案</p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
                 { constitution: "阳虚质 (Yang Deficiency)", verdict: "✅ 适合", emoji: "❄️", color: "text-blue-600" },

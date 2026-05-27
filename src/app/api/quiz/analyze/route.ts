@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const API_KEY = "sk-f0T5tXizIYzrLDB5L5kDJ0pwpfqdoRNxqE22aopWktYwYEdIFaVHMSuQ10f9ahJC";
+const API_BASE = "https://opencode.ai/zen/go/v1";
+
 const SYSTEM_PROMPT = `You are a TCM (Traditional Chinese Medicine) constitution analysis expert. Your role is to analyze quiz answers and determine the user's body constitution type according to the 9-type TCM constitution classification system.
 
 The 9 constitution types are:
@@ -24,11 +27,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid answers" }, { status: 400 });
     }
 
-    const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-      return NextResponse.json({ error: "API key not configured" }, { status: 503 });
-    }
-
     const userPrompt = `Based on the following quiz answers, determine the user's TCM body constitution type:
 
 ${JSON.stringify(answers, null, 2)}
@@ -42,31 +40,33 @@ Return ONLY valid JSON in this exact format (no markdown, no code fences):
   "summary_en": "Your body constitution is... (2-3 sentence English analysis)"
 }`;
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch(`${API_BASE}/chat/completions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-4o",
+        model: "deepseek-v4-flash",
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
           { role: "user", content: userPrompt },
         ],
         temperature: 0.3,
+        reasoning_effort: "disabled",
         response_format: { type: "json_object" },
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("OpenAI API error:", response.status, errorText);
+      console.error("AI API error:", response.status, errorText);
       return NextResponse.json({ error: "AI analysis failed" }, { status: 502 });
     }
 
     const data = await response.json();
-    const result = JSON.parse(data.choices[0].message.content);
+    const content = data.choices[0].message.content;
+    const result = JSON.parse(content);
 
     return NextResponse.json({
       primary_type: result.primary_type || "balanced",

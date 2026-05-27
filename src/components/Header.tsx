@@ -2,10 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 import { getQuizResult } from "@/lib/utils";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { data: session, status } = useSession();
+  const isLoggedIn = status === "authenticated";
   const hasResult = typeof window !== "undefined" && getQuizResult() !== null;
 
   return (
@@ -25,12 +28,28 @@ export default function Header() {
             <Link href="/food-scan" className="text-sm text-gray-600 hover:text-emerald-700 transition-colors">Food Scan</Link>
             <Link href="/learn" className="text-sm text-gray-600 hover:text-emerald-700 transition-colors">Learn</Link>
             <Link href="/daily" className="text-sm text-gray-600 hover:text-emerald-700 transition-colors">Daily</Link>
-            <Link
-              href="/quiz"
-              className="bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-emerald-700 transition-colors"
-            >
-              Start Quiz
-            </Link>
+            {isLoggedIn ? (
+              <div className="flex items-center gap-3">
+                {session?.user?.name && (
+                  <Link href="/profile" className="text-sm text-gray-500 hover:text-emerald-700 transition-colors">
+                    {session.user.name}
+                  </Link>
+                )}
+                <button
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="text-sm text-gray-400 hover:text-red-500 transition-colors"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-emerald-700 transition-colors"
+              >
+                Sign In
+              </Link>
+            )}
           </nav>
 
           {/* Mobile hamburger */}
@@ -58,6 +77,16 @@ export default function Header() {
             <Link href="/food-scan" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Food Scan</Link>
             <Link href="/learn" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Learn</Link>
             <Link href="/daily" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Daily</Link>
+            {isLoggedIn ? (
+              <div className="px-3 py-2 space-y-2">
+                {session?.user?.name && (
+                  <Link href="/profile" onClick={() => setMobileOpen(false)} className="block text-sm text-gray-500">{session.user.name}</Link>
+                )}
+                <button onClick={() => { setMobileOpen(false); signOut({ callbackUrl: "/" }); }} className="block text-sm text-red-400">Logout</button>
+              </div>
+            ) : (
+              <Link href="/login" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Sign In</Link>
+            )}
           </nav>
         )}
       </div>

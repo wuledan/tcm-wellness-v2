@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const API_KEY = "sk-f0T5tXizIYzrLDB5L5kDJ0pwpfqdoRNxqE22aopWktYwYEdIFaVHMSuQ10f9ahJC";
+const API_BASE = "https://opencode.ai/zen/go/v1";
+
 const SYSTEM_PROMPT = `You are a TCM (Traditional Chinese Medicine) food analysis expert. Analyze food images and provide TCM property classification and constitution compatibility assessment.
 
 TCM food properties: cold (寒), cool (凉), neutral (平), warm (温), hot (热).
@@ -20,11 +23,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No image provided" }, { status: 400 });
     }
 
-    const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-      return NextResponse.json({ error: "API key not configured" }, { status: 503 });
-    }
-
     const userPrompt = `Analyze this food image for a person with constitution type "${constitutionType || "balanced"}".
 
 Return ONLY valid JSON in this exact format (no markdown, no code fences):
@@ -43,14 +41,14 @@ Return ONLY valid JSON in this exact format (no markdown, no code fences):
   "alternative_match": "suitable"
 }`;
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch(`${API_BASE}/chat/completions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-4o",
+        model: "deepseek-v4-flash",
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
           {
@@ -63,18 +61,20 @@ Return ONLY valid JSON in this exact format (no markdown, no code fences):
         ],
         temperature: 0.3,
         max_tokens: 600,
+        reasoning_effort: "disabled",
         response_format: { type: "json_object" },
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("OpenAI Vision API error:", response.status, errorText);
+      console.error("AI Vision API error:", response.status, errorText);
       return NextResponse.json({ error: "AI analysis failed" }, { status: 502 });
     }
 
     const data = await response.json();
-    const result = JSON.parse(data.choices[0].message.content);
+    const content = data.choices[0].message.content;
+    const result = JSON.parse(content);
 
     return NextResponse.json({
       food_name: result.food_name || "Unknown Food",

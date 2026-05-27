@@ -1,14 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const API_KEY = "sk-f0T5tXizIYzrLDB5L5kDJ0pwpfqdoRNxqE22aopWktYwYEdIFaVHMSuQ10f9ahJC";
+const API_BASE = "https://opencode.ai/zen/go/v1";
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { constitutionType, constitutionName, season } = body;
-
-    const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-      return NextResponse.json({ error: "API key not configured" }, { status: 503 });
-    }
 
     const typeLabel = constitutionName || constitutionType || "balanced constitution";
     const seasonLabel = season || "the current season";
@@ -53,28 +51,30 @@ Return ONLY valid JSON in this exact format (no markdown, no code fences):
   ]
 }`;
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch(`${API_BASE}/chat/completions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-4o",
+        model: "deepseek-v4-flash",
         messages: [{ role: "user", content: userPrompt }],
         temperature: 0.7,
+        reasoning_effort: "disabled",
         response_format: { type: "json_object" },
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("OpenAI API error:", response.status, errorText);
+      console.error("AI API error:", response.status, errorText);
       return NextResponse.json({ error: "AI recommendation failed" }, { status: 502 });
     }
 
     const data = await response.json();
-    const result = JSON.parse(data.choices[0].message.content);
+    const content = data.choices[0].message.content;
+    const result = JSON.parse(content);
 
     return NextResponse.json(result);
   } catch (error) {
