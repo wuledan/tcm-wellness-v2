@@ -86,17 +86,17 @@ const matchColor: Record<MatchLevel, string> = {
   avoid: "#EF4444",
 };
 
-function getFallbackReason(foodNameZh: string, match: MatchLevel): { en: string; zh: string } {
+function getFallbackReason(foodNameEn: string, foodNameZh: string, match: MatchLevel): { en: string; zh: string } {
   if (match === "suitable") return {
-    en: `${foodNameZh} complements your body constitution well. Safe to consume.`,
+    en: `${foodNameEn} complements your body constitution well. Safe to consume.`,
     zh: `${foodNameZh}的性质与你的体质平衡互补，可以放心食用。`,
   };
   if (match === "caution") return {
-    en: `${foodNameZh} may mildly conflict with your constitution. Small amounts are fine, but avoid excess.`,
+    en: `${foodNameEn} may mildly conflict with your constitution. Small amounts are fine, but avoid excess.`,
     zh: `${foodNameZh}的性质可能与你的体质有轻微冲突，少量食用无大碍，但不宜过量。`,
   };
   return {
-    en: `${foodNameZh} significantly conflicts with your constitution. Prolonged or excessive consumption may worsen imbalances.`,
+    en: `${foodNameEn} significantly conflicts with your constitution. Prolonged or excessive consumption may worsen imbalances.`,
     zh: `${foodNameZh}的性质与你的体质明显冲突，长期或大量食用可能加重体质偏性。`,
   };
 }
@@ -218,7 +218,7 @@ export default function FoodScanPage() {
         ? foodDB["鸡肉"]
         : foodDB["豆腐"];
 
-      const reason = getFallbackReason(found.nameZh, match);
+      const reason = getFallbackReason(found.nameEn, found.nameZh, match);
 
       const analysisResult: AnalysisResult = {
         foodNameEn: found.nameEn,
@@ -376,7 +376,7 @@ export default function FoodScanPage() {
                     {matchLevelConfig[result.matchLevel].emoji}
                   </span>
                   <span className="font-semibold" style={{ color: matchColor[result.matchLevel] }}>
-                    {matchLevelConfig[result.matchLevel].label} &mdash; Not Recommended for Your Body Type
+                    {matchLevelConfig[result.matchLevel].label}
                   </span>
                 </div>
                 <p className="text-xs text-gray-400">{matchLevelConfig[result.matchLevel].label_zh}</p>
