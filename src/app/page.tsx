@@ -45,7 +45,7 @@ export default function HomePage() {
             </span>
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
               {heroParts[0]}
-              <span className="text-emerald-600">{heroParts[1]}</span>
+              <span className="text-emerald-600">{heroParts[1]?.replace("{/highlight}", "")}</span>
               {heroParts[2]}
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
@@ -77,7 +77,7 @@ export default function HomePage() {
           <div className="text-center mb-14">
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               {problemParts[0]}
-              <span className="text-emerald-600">{problemParts[1]}</span>
+              <span className="text-emerald-600">{problemParts[1]?.replace("{/highlight}", "")}</span>
               {problemParts[2]}
             </h2>
             <p className="text-gray-500 max-w-2xl mx-auto text-lg">
