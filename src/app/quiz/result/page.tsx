@@ -31,7 +31,7 @@ export default function QuizResultPage() {
   if (!constitution) return null;
 
   const handleShare = () => {
-    const text = `I discovered my body type: ${constitution.name_zh} (${constitution.name_en})! 🌿 Take the TCM body type quiz and discover yours.`;
+    const text = `I discovered my body type: ${constitution.name_en} (${constitution.name_zh})! 🌿 Take the TCM body type quiz and discover yours.`;
     if (navigator.share) {
       navigator.share({ title: "My TCM Body Type", text });
     } else {
@@ -49,9 +49,9 @@ export default function QuizResultPage() {
           <div className="text-center py-10 px-6" style={{ backgroundColor: constitution.bgColor }}>
             <span className="text-6xl block mb-4">{constitution.emoji}</span>
             <h1 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
-              {constitution.name_zh}
+              {constitution.name_en}
             </h1>
-            <p className="text-lg text-gray-500 mb-4">{constitution.name_en}</p>
+            <p className="text-lg text-gray-500 mb-4">{constitution.name_zh}</p>
             <span
               className="inline-block px-4 py-1.5 rounded-full text-sm font-medium"
               style={{ backgroundColor: constitution.color + "30", color: constitution.color }}
@@ -116,7 +116,7 @@ export default function QuizResultPage() {
               <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
                 <p className="text-sm text-gray-500">
                   You also show characteristics of{" "}
-                  <span className="font-medium text-gray-700">{secondary.name_zh} ({secondary.name_en})</span>
+                  <span className="font-medium text-gray-700">{secondary.name_en} ({secondary.name_zh})</span>
                 </p>
               </div>
             )}

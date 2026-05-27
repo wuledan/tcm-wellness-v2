@@ -61,7 +61,7 @@ export default function ProfilePage() {
               <span className="text-4xl">{constitution.emoji}</span>
               <div className="flex-1">
                 <h2 className="text-xl font-semibold text-gray-900">
-                  {constitution.name_zh} · {constitution.name_en}
+                  {constitution.name_en} · {constitution.name_zh}
                 </h2>
                 <p className="text-sm text-gray-400">Your primary body constitution</p>
               </div>

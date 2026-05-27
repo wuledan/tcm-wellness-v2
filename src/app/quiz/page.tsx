@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { quizQuestions } from "@/data/quiz";
-import { calculateQuizResult } from "@/data/quiz";
+import { quizQuestions, calculateQuizResult } from "@/data/quiz";
 import { storeQuizResult } from "@/lib/utils";
 
 export default function QuizPage() {
@@ -11,16 +10,17 @@ export default function QuizPage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [selected, setSelected] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const question = quizQuestions[currentQuestion];
   const totalQuestions = quizQuestions.length;
-  const progress = ((currentQuestion) / totalQuestions) * 100;
+  const progress = (currentQuestion / totalQuestions) * 100;
 
   const handleSelect = (value: string) => {
     setSelected(value);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!selected) return;
 
     const newAnswers = { ...answers, [question.id]: selected };
@@ -30,12 +30,56 @@ export default function QuizPage() {
       setCurrentQuestion(currentQuestion + 1);
       setSelected(null);
     } else {
-      // Calculate result
+      setIsSubmitting(true);
+      try {
+        const formattedAnswers = Object.entries(newAnswers).map(([qId, value]) => {
+          const q = quizQuestions.find((q) => q.id === parseInt(qId));
+          const opt = q?.options.find((o) => o.value === value);
+          return {
+            question_id: parseInt(qId),
+            question_en: q?.question_en || "",
+            answer_en: opt?.label_en || "",
+            constitution_value: value,
+          };
+        });
+
+        const res = await fetch("/api/quiz/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ answers: formattedAnswers }),
+        });
+
+        if (res.ok) {
+          const aiResult = await res.json();
+          storeQuizResult({
+            primaryType: aiResult.primary_type || "balanced",
+            secondaryType: aiResult.secondary_type || null,
+            scores: {},
+          });
+          router.push("/quiz/result");
+          return;
+        }
+      } catch {
+        // API unavailable — fall through to local calculation
+      }
+
       const result = calculateQuizResult(newAnswers);
       storeQuizResult(result);
       router.push("/quiz/result");
     }
   };
+
+  if (isSubmitting) {
+    return (
+      <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-b from-emerald-50 via-white to-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin text-5xl mb-6 inline-block">🔮</div>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">Analyzing Your Responses...</h2>
+          <p className="text-gray-400">Consulting ancient TCM wisdom with modern AI</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-b from-emerald-50 via-white to-white">
@@ -60,10 +104,10 @@ export default function QuizPage() {
         <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
           <div className="text-5xl mb-6 text-center">{question.emoji}</div>
           <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 text-center mb-2">
-            {question.question}
+            {question.question_en}
           </h2>
           <p className="text-gray-400 text-sm text-center mb-8 italic">
-            {question.question_en}
+            {question.question}
           </p>
 
           <div className="space-y-3">
@@ -77,8 +121,8 @@ export default function QuizPage() {
                     : "border-gray-100 hover:border-gray-200 hover:bg-gray-50"
                 }`}
               >
-                <div className="font-medium text-gray-900">{option.label}</div>
-                <div className="text-sm text-gray-400 mt-0.5">{option.label_en}</div>
+                <div className="font-medium text-gray-900">{option.label_en}</div>
+                <div className="text-sm text-gray-400 mt-0.5">{option.label}</div>
               </button>
             ))}
           </div>

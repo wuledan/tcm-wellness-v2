@@ -117,8 +117,8 @@ export default function LearnPage() {
                 }`}
               >
                 <span className="text-2xl block mb-1">{c.emoji}</span>
-                <span className="text-xs font-medium text-gray-700 block">{c.name_zh}</span>
-                <span className="text-[10px] text-gray-400">{c.name_en}</span>
+                <span className="text-xs font-medium text-gray-700 block">{c.name_en}</span>
+                <span className="text-[10px] text-gray-400">{c.name_zh}</span>
               </button>
             ))}
           </div>
@@ -131,7 +131,7 @@ export default function LearnPage() {
                 return (
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">
-                      {c.emoji} {c.name_zh} ({c.name_en})
+                      {c.emoji} {c.name_en} ({c.name_zh})
                     </h3>
                     <p className="text-gray-600 text-sm mb-3">{c.description}</p>
                     <p className="text-sm text-emerald-700 font-medium">{c.diet_principle}</p>

@@ -54,7 +54,7 @@ export default function DailyPage() {
           {constitution && (
             <div className="mt-6 p-4 bg-emerald-50 rounded-xl border border-emerald-100">
               <p className="text-sm text-emerald-700">
-                <span className="font-medium">For your {constitution.name_zh} body type: </span>
+                <span className="font-medium">For your {constitution.name_en} body type: </span>
                 {constitution.lifestyle_tips[tipIndex % constitution.lifestyle_tips.length]}
               </p>
             </div>
@@ -69,7 +69,7 @@ export default function DailyPage() {
             </span>
           </div>
           <h2 className="font-serif text-2xl font-bold text-amber-900 mb-1">
-            🍃 {currentTerm.name_zh} — {currentTerm.name_en}
+            🍃 {currentTerm.name_en} — {currentTerm.name_zh}
           </h2>
           <p className="text-amber-700 text-sm mb-2">{currentTerm.date}</p>
           <p className="text-amber-800 mb-4">{currentTerm.description}</p>
@@ -100,9 +100,9 @@ export default function DailyPage() {
               >
                 <span className="text-xs text-gray-400 block">{term.date}</span>
                 <span className={`font-medium ${currentTerm.id === term.id ? "text-amber-800" : "text-gray-700"}`}>
-                  {term.name_zh}
+                  {term.name_en}
                 </span>
-                <span className="text-[10px] text-gray-400 block">{term.name_en}</span>
+                <span className="text-[10px] text-gray-400 block">{term.name_zh}</span>
               </div>
             ))}
           </div>

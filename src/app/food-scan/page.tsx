@@ -7,49 +7,61 @@ import { getMatchLevel, matchLevelConfig, type MatchLevel, type TcmProperty } fr
 import { getConstitutionStyle } from "@/components/ConstitutionBadge";
 
 interface AnalysisResult {
-  foodName: string;
+  foodNameEn: string;
+  foodNameZh: string;
   calories: number;
   property: TcmProperty;
   propertyZh: string;
   matchLevel: MatchLevel;
-  reason: string;
-  alternativeName: string;
+  reasonEn: string;
+  reasonZh: string;
+  alternativeNameEn: string;
+  alternativeNameZh: string;
   alternativeProperty: TcmProperty;
   alternativeMatch: MatchLevel;
-  alternativeReason: string;
 }
 
 const sampleResults: Record<string, AnalysisResult> = {
   default: {
-    foodName: "红烧肉 (Braised Pork Belly)",
+    foodNameEn: "Braised Pork Belly",
+    foodNameZh: "红烧肉",
     calories: 550,
     property: "warm",
     propertyZh: "温",
     matchLevel: "avoid",
-    reason: "肥甘厚味会加重体内湿热，导致口苦、便粘等症状加重。",
-    alternativeName: "清蒸鱼 (Steamed Fish)",
+    reasonEn: "Rich, greasy foods worsen damp-heat in your body, leading to bitter taste and sticky stools.",
+    reasonZh: "肥甘厚味会加重体内湿热，导致口苦、便粘等症状加重。",
+    alternativeNameEn: "Steamed Fish",
+    alternativeNameZh: "清蒸鱼",
     alternativeProperty: "neutral",
     alternativeMatch: "suitable",
-    alternativeReason: "性平清淡，不增加湿热。",
   },
 };
 
-// Predefined food data for demo
-const foodDB: Record<string, { name: string; calories: number; property: TcmProperty; propertyZh: string; category: string }> = {
-  "红烧肉": { name: "红烧肉 (Braised Pork Belly)", calories: 550, property: "warm", propertyZh: "温", category: "肉类" },
-  "沙拉": { name: "蔬菜沙拉 (Vegetable Salad)", calories: 120, property: "cool", propertyZh: "凉", category: "蔬菜" },
-  "水果": { name: "时令水果 (Seasonal Fruit)", calories: 80, property: "cool", propertyZh: "凉", category: "水果" },
-  "米饭": { name: "米饭 (Steamed Rice)", calories: 116, property: "neutral", propertyZh: "平", category: "谷物" },
-  "面条": { name: "面条 (Noodles)", calories: 138, property: "neutral", propertyZh: "平", category: "谷物" },
-  "鸡肉": { name: "鸡肉 (Chicken)", calories: 239, property: "warm", propertyZh: "温", category: "肉类" },
-  "鱼": { name: "清蒸鱼 (Steamed Fish)", calories: 100, property: "neutral", propertyZh: "平", category: "海鲜" },
-  "牛肉": { name: "牛肉 (Beef)", calories: 250, property: "warm", propertyZh: "温", category: "肉类" },
-  "羊肉": { name: "羊肉 (Lamb)", calories: 294, property: "hot", propertyZh: "热", category: "肉类" },
-  "豆腐": { name: "豆腐 (Tofu)", calories: 76, property: "cool", propertyZh: "凉", category: "大豆制品" },
-  "西瓜": { name: "西瓜 (Watermelon)", calories: 30, property: "cold", propertyZh: "寒", category: "水果" },
-  "姜茶": { name: "姜茶 (Ginger Tea)", calories: 30, property: "warm", propertyZh: "温", category: "饮品" },
-  "咖啡": { name: "咖啡 (Coffee)", calories: 2, property: "warm", propertyZh: "温", category: "饮品" },
-  "绿茶": { name: "绿茶 (Green Tea)", calories: 1, property: "cool", propertyZh: "凉", category: "饮品" },
+interface FoodDBEntry {
+  nameEn: string;
+  nameZh: string;
+  calories: number;
+  property: TcmProperty;
+  propertyZh: string;
+  category: string;
+}
+
+const foodDB: Record<string, FoodDBEntry> = {
+  "红烧肉": { nameEn: "Braised Pork Belly", nameZh: "红烧肉", calories: 550, property: "warm", propertyZh: "温", category: "肉类" },
+  "沙拉": { nameEn: "Vegetable Salad", nameZh: "蔬菜沙拉", calories: 120, property: "cool", propertyZh: "凉", category: "蔬菜" },
+  "水果": { nameEn: "Seasonal Fruit", nameZh: "时令水果", calories: 80, property: "cool", propertyZh: "凉", category: "水果" },
+  "米饭": { nameEn: "Steamed Rice", nameZh: "米饭", calories: 116, property: "neutral", propertyZh: "平", category: "谷物" },
+  "面条": { nameEn: "Noodles", nameZh: "面条", calories: 138, property: "neutral", propertyZh: "平", category: "谷物" },
+  "鸡肉": { nameEn: "Chicken", nameZh: "鸡肉", calories: 239, property: "warm", propertyZh: "温", category: "肉类" },
+  "鱼": { nameEn: "Steamed Fish", nameZh: "清蒸鱼", calories: 100, property: "neutral", propertyZh: "平", category: "海鲜" },
+  "牛肉": { nameEn: "Beef", nameZh: "牛肉", calories: 250, property: "warm", propertyZh: "温", category: "肉类" },
+  "羊肉": { nameEn: "Lamb", nameZh: "羊肉", calories: 294, property: "hot", propertyZh: "热", category: "肉类" },
+  "豆腐": { nameEn: "Tofu", nameZh: "豆腐", calories: 76, property: "cool", propertyZh: "凉", category: "大豆制品" },
+  "西瓜": { nameEn: "Watermelon", nameZh: "西瓜", calories: 30, property: "cold", propertyZh: "寒", category: "水果" },
+  "姜茶": { nameEn: "Ginger Tea", nameZh: "姜茶", calories: 30, property: "warm", propertyZh: "温", category: "饮品" },
+  "咖啡": { nameEn: "Coffee", nameZh: "咖啡", calories: 2, property: "warm", propertyZh: "温", category: "饮品" },
+  "绿茶": { nameEn: "Green Tea", nameZh: "绿茶", calories: 1, property: "cool", propertyZh: "凉", category: "饮品" },
 };
 
 const propertyColors: Record<TcmProperty, string> = {
@@ -60,10 +72,38 @@ const propertyColors: Record<TcmProperty, string> = {
   hot: "#D95050",
 };
 
+const propertyLabel: Record<TcmProperty, string> = {
+  cold: "Cold",
+  cool: "Cool",
+  neutral: "Neutral",
+  warm: "Warm",
+  hot: "Hot",
+};
+
 const matchColor: Record<MatchLevel, string> = {
   suitable: "#22C55E",
   caution: "#EAB308",
   avoid: "#EF4444",
+};
+
+function getFallbackReason(foodNameZh: string, match: MatchLevel): { en: string; zh: string } {
+  if (match === "suitable") return {
+    en: `${foodNameZh} complements your body constitution well. Safe to consume.`,
+    zh: `${foodNameZh}的性质与你的体质平衡互补，可以放心食用。`,
+  };
+  if (match === "caution") return {
+    en: `${foodNameZh} may mildly conflict with your constitution. Small amounts are fine, but avoid excess.`,
+    zh: `${foodNameZh}的性质可能与你的体质有轻微冲突，少量食用无大碍，但不宜过量。`,
+  };
+  return {
+    en: `${foodNameZh} significantly conflicts with your constitution. Prolonged or excessive consumption may worsen imbalances.`,
+    zh: `${foodNameZh}的性质与你的体质明显冲突，长期或大量食用可能加重体质偏性。`,
+  };
+}
+
+const propertyToZh = (p: TcmProperty): string => {
+  const map: Record<TcmProperty, string> = { cold: "寒", cool: "凉", neutral: "平", warm: "温", hot: "热" };
+  return map[p];
 };
 
 export default function FoodScanPage() {
@@ -88,6 +128,12 @@ export default function FoodScanPage() {
     ? getConstitutionStyle(constitutionResult.primaryType)
     : null;
 
+  const updateScanCount = () => {
+    const newCount = scanCount + 1;
+    setScanCount(newCount);
+    localStorage.setItem("tcm_scan_count", newCount.toString());
+  };
+
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -95,33 +141,62 @@ export default function FoodScanPage() {
     const reader = new FileReader();
     reader.onload = (event) => {
       setSelectedImage(event.target?.result as string);
-      runAnalysis();
+      runImageAnalysis(event.target?.result as string);
     };
     reader.readAsDataURL(file);
   };
 
-  const runAnalysis = () => {
+  const runImageAnalysis = async (imageData: string) => {
     setIsAnalyzing(true);
     setResult(null);
 
-    // Simulate AI analysis
-    setTimeout(() => {
-      const demoResult = sampleResults.default;
-      const primaryType = constitutionResult?.primaryType || "balanced";
-      const match = getMatchLevel(primaryType, demoResult.property);
+    const primaryType = constitutionResult?.primaryType || "balanced";
 
-      const analysisResult: AnalysisResult = {
-        ...demoResult,
-        matchLevel: match,
-        alternativeMatch: getMatchLevel(primaryType, demoResult.alternativeProperty),
-      };
+    try {
+      const res = await fetch("/api/food/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: imageData, constitutionType: primaryType }),
+      });
 
-      setResult(analysisResult);
-      setIsAnalyzing(false);
-      const newCount = scanCount + 1;
-      setScanCount(newCount);
-      localStorage.setItem("tcm_scan_count", newCount.toString());
-    }, 2000);
+      if (res.ok) {
+        const data = await res.json();
+        const property = data.tcm_property as TcmProperty;
+        const match = data.match_level as MatchLevel;
+
+        setResult({
+          foodNameEn: data.food_name,
+          foodNameZh: data.food_name_zh,
+          calories: data.estimated_calories,
+          property,
+          propertyZh: data.tcm_property_zh,
+          matchLevel: match,
+          reasonEn: data.reason_en,
+          reasonZh: data.reason_zh,
+          alternativeNameEn: data.alternative_name,
+          alternativeNameZh: data.alternative_name_zh,
+          alternativeProperty: data.alternative_property as TcmProperty,
+          alternativeMatch: data.alternative_match as MatchLevel,
+        });
+        setIsAnalyzing(false);
+        updateScanCount();
+        return;
+      }
+    } catch {
+      // API unavailable — fall through to fallback
+    }
+
+    // Fallback: simulated analysis
+    const demoResult = sampleResults.default;
+    const match = getMatchLevel(primaryType, demoResult.property);
+
+    setResult({
+      ...demoResult,
+      matchLevel: match,
+      alternativeMatch: getMatchLevel(primaryType, demoResult.alternativeProperty),
+    });
+    setIsAnalyzing(false);
+    updateScanCount();
   };
 
   const handleManualSearch = () => {
@@ -143,31 +218,27 @@ export default function FoodScanPage() {
         ? foodDB["鸡肉"]
         : foodDB["豆腐"];
 
+      const reason = getFallbackReason(found.nameZh, match);
+
       const analysisResult: AnalysisResult = {
-        foodName: found.name,
+        foodNameEn: found.nameEn,
+        foodNameZh: found.nameZh,
         calories: found.calories,
         property: found.property,
         propertyZh: found.propertyZh,
         matchLevel: match,
-        reason: getReason(found.name, match),
-        alternativeName: alternative.name,
+        reasonEn: reason.en,
+        reasonZh: reason.zh,
+        alternativeNameEn: alternative.nameEn,
+        alternativeNameZh: alternative.nameZh,
         alternativeProperty: alternative.property,
-        alternativeMatch: "suitable",
-        alternativeReason: "性平清淡，适合你的体质。",
+        alternativeMatch: getMatchLevel(primaryType, alternative.property),
       };
 
       setResult(analysisResult);
       setIsAnalyzing(false);
-      const newCount = scanCount + 1;
-      setScanCount(newCount);
-      localStorage.setItem("tcm_scan_count", newCount.toString());
+      updateScanCount();
     }, 1500);
-  };
-
-  const getReason = (foodName: string, match: MatchLevel): string => {
-    if (match === "suitable") return `${foodName}的性质与你的体质平衡互补，可以放心食用。`;
-    if (match === "caution") return `${foodName}的性质可能与你的体质有轻微冲突，少量食用无大碍，但不宜过量。`;
-    return `${foodName}的性质与你的体质明显冲突，长期或大量食用可能加重体质偏性。`;
   };
 
   if (!mounted) return null;
@@ -276,15 +347,19 @@ export default function FoodScanPage() {
             <div className="p-6 border-b border-gray-100">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900">{result.foodName}</h2>
-                  <p className="text-sm text-gray-400">≈{result.calories}kcal per serving</p>
+                  <h2 className="text-xl font-bold text-gray-900">{result.foodNameEn}</h2>
+                  <p className="text-sm text-gray-400">{result.foodNameZh}</p>
+                  <p className="text-sm text-gray-400 mt-1">≈{result.calories}kcal per serving</p>
                 </div>
-                <span
-                  className="px-3 py-1 rounded-full text-sm font-medium"
-                  style={{ backgroundColor: propertyColors[result.property] + "20", color: propertyColors[result.property] }}
-                >
-                  性{result.propertyZh}
-                </span>
+                <div className="text-right">
+                  <span
+                    className="px-3 py-1 rounded-full text-sm font-medium"
+                    style={{ backgroundColor: propertyColors[result.property] + "20", color: propertyColors[result.property] }}
+                  >
+                    {propertyLabel[result.property]}
+                  </span>
+                  <p className="text-xs text-gray-400 mt-0.5">性{result.propertyZh}</p>
+                </div>
               </div>
 
               {/* Match level */}
@@ -297,10 +372,12 @@ export default function FoodScanPage() {
                     {matchLevelConfig[result.matchLevel].emoji}
                   </span>
                   <span className="font-semibold" style={{ color: matchColor[result.matchLevel] }}>
-                    {matchLevelConfig[result.matchLevel].label_zh} &mdash; Not Recommended for Your Body Type
+                    {matchLevelConfig[result.matchLevel].label} &mdash; Not Recommended for Your Body Type
                   </span>
                 </div>
-                <p className="text-sm text-gray-600 mt-1">{result.reason}</p>
+                <p className="text-xs text-gray-400">{matchLevelConfig[result.matchLevel].label_zh}</p>
+                <p className="text-sm text-gray-600 mt-2">{result.reasonEn}</p>
+                <p className="text-xs text-gray-400 mt-1">{result.reasonZh}</p>
               </div>
             </div>
 
@@ -311,17 +388,21 @@ export default function FoodScanPage() {
               </div>
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="font-medium text-gray-900">{result.alternativeName}</p>
-                  <span
-                    className="inline-block px-2 py-0.5 rounded-full text-xs mt-1"
-                    style={{ backgroundColor: propertyColors[result.alternativeProperty] + "20", color: propertyColors[result.alternativeProperty] }}
-                  >
-                    性{result.alternativeProperty === "neutral" ? "平" : result.alternativeProperty === "cool" ? "凉" : result.alternativeProperty === "cold" ? "寒" : result.alternativeProperty === "warm" ? "温" : "热"}
-                  </span>
-                  <span className="ml-2 text-green-600 text-sm">{matchLevelConfig[result.alternativeMatch].emoji} {matchLevelConfig[result.alternativeMatch].label_zh}</span>
+                  <p className="font-medium text-gray-900">{result.alternativeNameEn}</p>
+                  <p className="text-sm text-gray-400">{result.alternativeNameZh}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span
+                      className="inline-block px-2 py-0.5 rounded-full text-xs"
+                      style={{ backgroundColor: propertyColors[result.alternativeProperty] + "20", color: propertyColors[result.alternativeProperty] }}
+                    >
+                      {propertyLabel[result.alternativeProperty]}
+                    </span>
+                    <span className="text-green-600 text-sm">
+                      {matchLevelConfig[result.alternativeMatch].emoji} {matchLevelConfig[result.alternativeMatch].label}
+                    </span>
+                  </div>
                 </div>
               </div>
-              <p className="text-sm text-gray-500 mt-2">{result.alternativeReason}</p>
             </div>
 
             {/* Actions */}

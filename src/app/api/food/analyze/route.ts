@@ -1,0 +1,97 @@
+import { NextRequest, NextResponse } from "next/server";
+
+const SYSTEM_PROMPT = `You are a TCM (Traditional Chinese Medicine) food analysis expert. Analyze food images and provide TCM property classification and constitution compatibility assessment.
+
+TCM food properties: cold (寒), cool (凉), neutral (平), warm (温), hot (热).
+
+Match levels:
+- "suitable": The food's TCM property complements or balances the user's constitution.
+- "caution": The food may have mild conflict with the constitution; small amounts are OK.
+- "avoid": The food's property conflicts significantly with the constitution.
+
+Always provide a suitable alternative food suggestion.`;
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { image, constitutionType } = body;
+
+    if (!image) {
+      return NextResponse.json({ error: "No image provided" }, { status: 400 });
+    }
+
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ error: "API key not configured" }, { status: 503 });
+    }
+
+    const userPrompt = `Analyze this food image for a person with constitution type "${constitutionType || "balanced"}".
+
+Return ONLY valid JSON in this exact format (no markdown, no code fences):
+{
+  "food_name": "food name in English",
+  "food_name_zh": "食物中文名",
+  "estimated_calories": 550,
+  "tcm_property": "warm",
+  "tcm_property_zh": "温",
+  "match_level": "avoid",
+  "reason_en": "2-3 sentence English explanation of why this food matches the constitution",
+  "reason_zh": "2-3句中文分析说明",
+  "alternative_name": "Steamed Fish",
+  "alternative_name_zh": "清蒸鱼",
+  "alternative_property": "neutral",
+  "alternative_match": "suitable"
+}`;
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4o",
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          {
+            role: "user",
+            content: [
+              { type: "text", text: userPrompt },
+              { type: "image_url", image_url: { url: image, detail: "low" } },
+            ],
+          },
+        ],
+        temperature: 0.3,
+        max_tokens: 600,
+        response_format: { type: "json_object" },
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("OpenAI Vision API error:", response.status, errorText);
+      return NextResponse.json({ error: "AI analysis failed" }, { status: 502 });
+    }
+
+    const data = await response.json();
+    const result = JSON.parse(data.choices[0].message.content);
+
+    return NextResponse.json({
+      food_name: result.food_name || "Unknown Food",
+      food_name_zh: result.food_name_zh || "未知食物",
+      estimated_calories: result.estimated_calories || 100,
+      tcm_property: result.tcm_property || "neutral",
+      tcm_property_zh: result.tcm_property_zh || "平",
+      match_level: result.match_level || "caution",
+      reason_en: result.reason_en || "",
+      reason_zh: result.reason_zh || "",
+      alternative_name: result.alternative_name || "",
+      alternative_name_zh: result.alternative_name_zh || "",
+      alternative_property: result.alternative_property || "neutral",
+      alternative_match: result.alternative_match || "suitable",
+    });
+  } catch (error) {
+    console.error("Food analysis error:", error);
+    return NextResponse.json({ error: "Analysis failed" }, { status: 500 });
+  }
+}
