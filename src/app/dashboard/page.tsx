@@ -64,7 +64,7 @@ export default function DashboardPage() {
   const [result, setResult] = useState<ReturnType<typeof getQuizResult>>(null);
   const [aiRecommendations, setAiRecommendations] = useState<AiRecommendations | null>(null);
   const [aiLoading, setAiLoading] = useState(false);
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   const mealsT = t("dashboard.meals");
   const parsedMealsT = typeof mealsT === "string" ? { breakfast: {}, lunch: {}, dinner: {} } : mealsT as any;
@@ -97,6 +97,7 @@ export default function DashboardPage() {
             constitutionType: constitution.id,
             constitutionName: constitution.name_en,
             season: getSeason(),
+            language: locale,
           }),
         });
         if (res.ok) {

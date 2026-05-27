@@ -6,11 +6,13 @@ import { useRouter } from "next/navigation";
 import { constitutions } from "@/data/constitutions";
 import { getQuizResult } from "@/lib/utils";
 import { foodNameZhToEn } from "@/data/foods";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 export default function QuizResultPage() {
   const router = useRouter();
   const [result, setResult] = useState<ReturnType<typeof getQuizResult>>(null);
   const [mounted, setMounted] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
@@ -32,12 +34,14 @@ export default function QuizResultPage() {
   if (!constitution) return null;
 
   const handleShare = () => {
-    const text = `I discovered my body type: ${constitution.name_en} (${constitution.name_zh})! 🌿 Take the TCM body type quiz and discover yours.`;
+    const text = t("quizResult.shareText")
+      .replace("{nameEn}", constitution.name_en)
+      .replace("{nameZh}", constitution.name_zh);
     if (navigator.share) {
-      navigator.share({ title: "My TCM Body Type", text });
+      navigator.share({ title: t("quizResult.shareTitle"), text });
     } else {
       navigator.clipboard.writeText(text);
-      alert("Result copied to clipboard!");
+      alert(t("quizResult.copiedAlert"));
     }
   };
 
@@ -57,7 +61,7 @@ export default function QuizResultPage() {
               className="inline-block px-4 py-1.5 rounded-full text-sm font-medium"
               style={{ backgroundColor: constitution.color + "30", color: constitution.color }}
             >
-              Your Primary Body Type
+              {t("quizResult.primaryLabel")}
             </span>
           </div>
 
@@ -69,13 +73,13 @@ export default function QuizResultPage() {
           {/* Key Info */}
           <div className="px-6 pb-8 space-y-6">
             <div>
-              <h3 className="font-semibold text-gray-900 mb-2">🥗 Diet Principle</h3>
+              <h3 className="font-semibold text-gray-900 mb-2">{t("quizResult.dietPrinciple")}</h3>
               <p className="text-gray-600">{constitution.diet_principle}</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-green-50 rounded-xl p-4">
-                <h4 className="font-medium text-green-800 text-sm mb-2">✅ Recommended Foods</h4>
+                <h4 className="font-medium text-green-800 text-sm mb-2">{t("quizResult.recommendedFoods")}</h4>
                 <div className="flex flex-wrap gap-2">
                   {constitution.recommended_foods.map((food, i) => {
                     const foodEn = foodNameZhToEn[food] || food;
@@ -90,7 +94,7 @@ export default function QuizResultPage() {
                 </div>
               </div>
               <div className="bg-red-50 rounded-xl p-4">
-                <h4 className="font-medium text-red-800 text-sm mb-2">❌ Avoid Foods</h4>
+                <h4 className="font-medium text-red-800 text-sm mb-2">{t("quizResult.avoidFoods")}</h4>
                 <div className="flex flex-wrap gap-2">
                   {constitution.avoid_foods.map((food, i) => {
                     const foodEn = foodNameZhToEn[food] || food;
@@ -107,12 +111,12 @@ export default function QuizResultPage() {
             </div>
 
             <div>
-              <h3 className="font-semibold text-gray-900 mb-2">🏃 Exercise Recommendation</h3>
+              <h3 className="font-semibold text-gray-900 mb-2">{t("quizResult.exercise")}</h3>
               <p className="text-gray-600">{constitution.exercise}</p>
             </div>
 
             <div>
-              <h3 className="font-semibold text-gray-900 mb-2">💡 Lifestyle Tips</h3>
+              <h3 className="font-semibold text-gray-900 mb-2">{t("quizResult.lifestyleTips")}</h3>
               <ul className="space-y-2">
                 {constitution.lifestyle_tips.map((tip, i) => (
                   <li key={i} className="flex items-start gap-2 text-gray-600">
@@ -126,8 +130,7 @@ export default function QuizResultPage() {
             {secondary && (
               <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
                 <p className="text-sm text-gray-500">
-                  You also show characteristics of{" "}
-                  <span className="font-medium text-gray-700">{secondary.name_en} ({secondary.name_zh})</span>
+                  {t("quizResult.secondaryHint").replace("{name}", secondary.name_en).replace("{nameZh}", secondary.name_zh)}
                 </p>
               </div>
             )}
@@ -139,19 +142,19 @@ export default function QuizResultPage() {
               href="/dashboard"
               className="block w-full text-center bg-emerald-600 text-white py-3.5 rounded-xl font-medium hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200"
             >
-              View My Dashboard →
+              {t("quizResult.viewDashboard")}
             </Link>
             <button
               onClick={handleShare}
               className="block w-full text-center border border-gray-300 text-gray-700 py-3 rounded-xl font-medium hover:bg-gray-50 transition-all"
             >
-              📤 Share My Result
+              {t("quizResult.shareResult")}
             </button>
             <Link
               href="/quiz"
               className="block w-full text-center text-gray-400 py-2 text-sm hover:text-gray-600 transition-colors"
             >
-              Retake Quiz
+              {t("quizResult.retakeQuiz")}
             </Link>
           </div>
         </div>

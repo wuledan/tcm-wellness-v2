@@ -17,25 +17,35 @@ Always provide a suitable alternative food suggestion.`;
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { image, constitutionType } = body;
+    const { image, constitutionType, language } = body;
 
     if (!image) {
       return NextResponse.json({ error: "No image provided" }, { status: 400 });
     }
 
+    const langMap: Record<string, string> = {
+      en: "English",
+      zh: "Chinese",
+      ko: "Korean",
+      vi: "Vietnamese",
+    };
+    const replyLang = langMap[language] || "English";
+
     const userPrompt = `Analyze this food image for a person with constitution type "${constitutionType || "balanced"}".
+
+IMPORTANT: Reply in ${replyLang}.
 
 Return ONLY valid JSON in this exact format (no markdown, no code fences):
 {
-  "food_name": "food name in English",
+  "food_name": "food name (in ${replyLang})",
   "food_name_zh": "食物中文名",
   "estimated_calories": 550,
   "tcm_property": "warm",
   "tcm_property_zh": "温",
   "match_level": "avoid",
-  "reason_en": "2-3 sentence English explanation of why this food matches the constitution",
+  "reason_en": "explanation in ${replyLang} (2-3 sentences)",
   "reason_zh": "2-3句中文分析说明",
-  "alternative_name": "Steamed Fish",
+  "alternative_name": "alternative food name (in ${replyLang})",
   "alternative_name_zh": "清蒸鱼",
   "alternative_property": "neutral",
   "alternative_match": "suitable"

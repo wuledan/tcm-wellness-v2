@@ -21,23 +21,33 @@ Respond with a confidence score between 0 and 1 reflecting how certain you are a
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { answers } = body;
+    const { answers, language } = body;
 
     if (!answers || !Array.isArray(answers) || answers.length === 0) {
       return NextResponse.json({ error: "Invalid answers" }, { status: 400 });
     }
 
+    const langMap: Record<string, string> = {
+      en: "English",
+      zh: "Chinese",
+      ko: "Korean",
+      vi: "Vietnamese",
+    };
+    const replyLang = langMap[language] || "English";
+
     const userPrompt = `Based on the following quiz answers, determine the user's TCM body constitution type:
 
 ${JSON.stringify(answers, null, 2)}
+
+IMPORTANT: Reply in ${replyLang}.
 
 Return ONLY valid JSON in this exact format (no markdown, no code fences):
 {
   "primary_type": "constitution_id",
   "secondary_type": "constitution_id or null",
   "confidence": 0.85,
-  "summary_zh": "你的体质属于...，简短的个性化中文分析（2-3句话）",
-  "summary_en": "Your body constitution is... (2-3 sentence English analysis)"
+  "summary_zh": "2-3句中文分析说明",
+  "summary_en": "2-3 sentence analysis in ${replyLang}"
 }`;
 
     const response = await fetch(`${API_BASE}/chat/completions`, {

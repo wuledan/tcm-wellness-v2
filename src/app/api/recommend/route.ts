@@ -6,12 +6,15 @@ const API_BASE = "https://opencode.ai/zen/go/v1";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { constitutionType, constitutionName, season } = body;
+    const { constitutionType, constitutionName, season, language } = body;
 
     const typeLabel = constitutionName || constitutionType || "balanced constitution";
     const seasonLabel = season || "the current season";
 
-    const userPrompt = `TCM wellness expert. Recommend for ${typeLabel} in ${seasonLabel}. Return JSON: {"meals":{"breakfast":{"name":"Meal name","name_zh":"中文","description":"Eng","description_zh":"中文","foods":["Oats","Yam"]},"lunch":{"name":"","name_zh":"","description":"","description_zh":"","foods":["Brown rice","Fish"]},"dinner":{"name":"","name_zh":"","description":"","description_zh":"","foods":["Soup","Tofu"]}},"exercise":{"name":"","name_zh":"","duration":"","description":"","description_zh":""},"lifestyle_tips":[{"tip_en":"","tip_zh":""},{"tip_en":"","tip_zh":""}]}. Foods in English. Descriptions bilingual.`;
+    const langMap: Record<string, string> = { en: "English", zh: "Chinese", ko: "Korean", vi: "Vietnamese" };
+    const replyLang = langMap[language] || "English";
+
+    const userPrompt = `TCM wellness expert. Recommend for ${typeLabel} in ${seasonLabel}. Reply in ${replyLang}. Return JSON: {"meals":{"breakfast":{"name":"Meal name","name_zh":"中文","description":"Eng","description_zh":"中文","foods":["Oats","Yam"]},"lunch":{"name":"","name_zh":"","description":"","description_zh":"","foods":["Brown rice","Fish"]},"dinner":{"name":"","name_zh":"","description":"","description_zh":"","foods":["Soup","Tofu"]}},"exercise":{"name":"","name_zh":"","duration":"","description":"","description_zh":""},"lifestyle_tips":[{"tip_en":"","tip_zh":""},{"tip_en":"","tip_zh":""}]}. name and description in ${replyLang}. name_zh and description_zh in Chinese.`;
 
     const response = await fetch(`${API_BASE}/chat/completions`, {
       method: "POST",

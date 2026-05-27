@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { quizQuestions, calculateQuizResult } from "@/data/quiz";
 import { storeQuizResult } from "@/lib/utils";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 export default function QuizPage() {
   const router = useRouter();
@@ -11,6 +12,7 @@ export default function QuizPage() {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [selected, setSelected] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { t, locale } = useTranslation();
 
   const question = quizQuestions[currentQuestion];
   const totalQuestions = quizQuestions.length;
@@ -46,7 +48,7 @@ export default function QuizPage() {
         const res = await fetch("/api/quiz/analyze", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ answers: formattedAnswers }),
+          body: JSON.stringify({ answers: formattedAnswers, language: locale }),
         });
 
         if (res.ok) {
@@ -74,8 +76,8 @@ export default function QuizPage() {
       <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-b from-emerald-50 via-white to-white flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin text-5xl mb-6 inline-block">🔮</div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Analyzing Your Responses...</h2>
-          <p className="text-gray-400">Consulting ancient TCM wisdom with modern AI</p>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">{t("quiz.analyzingTitle")}</h2>
+          <p className="text-gray-400">{t("quiz.analyzingSubtext")}</p>
         </div>
       </div>
     );
@@ -88,7 +90,7 @@ export default function QuizPage() {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-gray-500">
-              Question {currentQuestion + 1} of {totalQuestions}
+              {t("quiz.questionOf").replace("{current}", String(currentQuestion + 1)).replace("{total}", String(totalQuestions))}
             </span>
             <span className="text-sm text-gray-500">{Math.round(progress / (100 / totalQuestions))}/{totalQuestions}</span>
           </div>
@@ -136,7 +138,7 @@ export default function QuizPage() {
                 : "bg-gray-200 cursor-not-allowed"
             }`}
           >
-            {currentQuestion < totalQuestions - 1 ? "Next →" : "See My Results →"}
+            {currentQuestion < totalQuestions - 1 ? t("quiz.nextButton") : t("quiz.submitButton")}
           </button>
         </div>
       </div>

@@ -296,22 +296,26 @@
           {
             "title": "Understanding the 9 Body Types in TCM",
             "summary": "An overview of the nine constitution types and what they mean for your health.",
-            "icon": "🧬"
+            "icon": "🧬",
+            "detail": "The 9 TCM body constitutions (九种体质) are a foundational concept in Traditional Chinese Medicine. Each type represents a unique pattern of physical and energetic imbalance. The Balanced type (平和质) is the ideal — harmonious Yin and Yang. The other 8 types are imbalanced in different ways: Qi Deficiency (low energy), Yang Deficiency (cold), Yin Deficiency (heat), Phlegm-Dampness (stagnation), Damp-Heat (sticky heat), Blood Stasis (poor circulation), Qi Stagnation (emotional blockage), and Intrinsic (allergy-prone). Your quiz result identifies your unique combination."
           },
           {
             "title": "气虚质 (Qi Deficiency) — When Your Battery is Low",
             "summary": "Signs, causes, and dietary strategies for Qi deficiency.",
-            "icon": "💨"
+            "icon": "💨",
+            "detail": "Qi Deficiency is one of the most common TCM patterns in modern life. Think of Qi as your body's battery — when it's low, everything feels harder. Symptoms include fatigue, weak voice, spontaneous sweating, and a pale complexion. The Spleen (消化系统) is the organ most involved in Qi production. If your digestion is weak, your Qi production suffers. Key support: warm, cooked foods (soups, congee), avoiding raw/cold foods, and gentle exercise like Tai Chi. Ginger, dates, and astragalus (黄芪) are your best friends."
           },
           {
             "title": "阳虚质 (Yang Deficiency) — The Cold Body Type",
             "summary": "Why you feel cold all the time and how to warm up from within.",
-            "icon": "❄️"
+            "icon": "❄️",
+            "detail": "Yang Deficiency is like having a fireplace that doesn't burn hot enough. The key symptom is feeling cold — especially in the hands, feet, and lower back. You crave warmth and hot drinks. Your digestion tends to be slow, and you may have loose stools. The Kidneys (肾) are the source of Yang energy in TCM. Supporting Kidney Yang is the treatment principle. Eat warming foods: lamb, leeks, ginger, cinnamon, and walnuts. Avoid raw foods, iced drinks, and cold salads. Regular foot soaks in warm water can work wonders."
           },
           {
             "title": "阴虚质 (Yin Deficiency) — The Heat Inside",
             "summary": "Understanding internal heat and how to cool and nourish your body.",
-            "icon": "🔥"
+            "icon": "🔥",
+            "detail": "Yin Deficiency creates a sensation of internal heat — like a car engine running without enough coolant. You feel warm, especially in the palms and soles. Your throat and skin feel dry. You may experience night sweats and a thin, rapid pulse. Sleep is often disturbed, with vivid dreams. The Kidneys and Liver (肝肾) Yin need nourishment. Eat cooling, moistening foods: pears, lily bulb, white fungus, duck, and tofu. Avoid spicy foods, alcohol, and excessive exercise that causes sweating. Go to bed before 11 PM — nighttime is Yin time."
           }
         ]
       },
@@ -322,22 +326,26 @@
           {
             "title": "Brain Fog: A TCM Perspective",
             "summary": "TCM views brain fog as a Spleen Qi deficiency. Learn how diet affects mental clarity.",
-            "icon": "🧠"
+            "icon": "🧠",
+            "detail": "In TCM, brain fog (脑雾) is typically a Spleen Qi Deficiency pattern. The Spleen is responsible for transforming food into clear energy (清气). When the Spleen is weak, the head feels heavy, cloudy, and unfocused. Dampness (湿) often accompanies this — a sticky, heavy sensation that clouds the mind. Common triggers: too many raw foods, dairy, sugar, and overthinking. Solutions: eat cooked, warming meals (breakfast congee with ginger), reduce screen time, and practice mindful movement. Ginseng (人参) and astragalus (黄芪) tea can help lift mental clarity."
           },
           {
             "title": "Afternoon Fatigue & The Body Clock",
             "summary": "Why you crash at 2 PM according to the TCM organ clock.",
-            "icon": "⏰"
+            "icon": "⏰",
+            "detail": "In TCM's 24-hour organ clock (子午流注), the afternoon slump (1-3 PM) corresponds to the Small Intestine meridian (小肠经). This is when the body processes and absorbs nutrients from lunch. If your Spleen Qi is weak, you won't effectively extract energy from food, leading to a blood sugar crash. The 3-5 PM window (Bladder meridian) is another low-energy period for Kidney Qi deficient types. Solutions: eat a protein-rich, warm lunch (not just carbs), take a short walk after eating, and avoid iced drinks. A 15-minute power nap before 3 PM aligns with natural energy rhythms."
           },
           {
             "title": "Understanding Bloating from a TCM View",
             "summary": "Bloating is often Spleen Qi stagnation. Discover which foods help.",
-            "icon": "🫧"
+            "icon": "🫧",
+            "detail": "In TCM, bloating (腹胀) is primarily a Spleen and Stomach (脾胃) dysfunction. The Spleen's job is to transform and transport (运化) — when it's weak, food stagnates as gas and distention. The most common bloating type is Spleen Qi Deficiency with Dampness (脾虚湿盛). Key triggers: eating while stressed, overeating, cold/raw foods, dairy, and excessive sweets. Emotional factors — worry and overthinking (思) directly weaken the Spleen according to the Five Element theory. Solutions: eat smaller portions, chew thoroughly, avoid drinking while eating, and use digestive herbs like cardamom (砂仁) and ginger."
           },
           {
             "title": "Insomnia: Finding Your Sleep Type",
             "summary": "Different sleep issues point to different organ imbalances in TCM.",
-            "icon": "🌙"
+            "icon": "🌙",
+            "detail": "TCM identifies several insomnia (失眠) patterns, each needing different treatment. Heart Blood Deficiency (心血虚): difficulty falling asleep, mind racing. Liver Fire Blazing (肝火旺): waking between 1-3 AM, irritability. Yin deficiency: waking with night sweats, dry throat. Phlegm-heat: restless sleep, dreams, heavy snoring. The treatment depends entirely on your pattern. General tips: go to bed by 11 PM (Gallbladder meridian time), avoid screens 1 hour before bed, soak feet in warm water, and practice abdominal breathing. Lavender or sandalwood essential oils can calm the Shen (神)."
           }
         ]
       },
@@ -348,26 +356,31 @@
           {
             "title": "TCM vs. Western Nutrition: A Comparison",
             "summary": "How two medical paradigms approach food and health differently.",
-            "icon": "🔄"
+            "icon": "🔄",
+            "detail": "Western nutrition breaks food down into chemical components: calories, protein, fat, carbohydrates, vitamins, and minerals. It asks \"what is in this food?\" TCM food therapy asks \"what does this food DO in the body?\" — its thermal nature (hot/warm/cool/cold), its flavor (sweet/sour/bitter/pungent/salty), and which organs it targets (meridian affinity). Both systems have value. Western nutrition excels at acute care and measurable deficiencies. TCM excels at preventive, personalized dietary guidance. The most powerful approach integrates both — using TCM's constitutional framework as the foundation, while acknowledging modern nutritional science for specifics."
           },
           {
             "title": "The Spleen in TCM vs. Western Medicine",
             "summary": "The TCM Spleen is not the same organ — here's what it really means.",
-            "icon": "🔬"
+            "icon": "🔬",
+            "detail": "The TCM Spleen (脾) is very different from the anatomical pancreas/spleen of Western medicine. In TCM, the Spleen is a functional system responsible for transforming food into Qi and Blood, holding organs in place, and keeping blood in the vessels. Its partner organ is the Stomach (胃). The Spleen likes warmth and dislikes dampness. When weak, symptoms include fatigue, bloating, loose stools, and a feeling of heaviness. In Western medicine, the pancreas produces digestive enzymes and insulin; the spleen filters blood. The conditions are different, but the overlap — digestive health and energy production — is where TCM dietary therapy has its greatest strengths."
           },
           {
             "title": "Inflammation: A TCM and Western View",
             "summary": "Western anti-inflammatory meets TCM heat-clearing approaches.",
-            "icon": "🔥"
+            "icon": "🔥",
+            "detail": "Western medicine sees inflammation as the immune system's response to injury or infection — acute (helpful) or chronic (harmful). TCM sees inflammation patterns through the lens of Heat (热): Excess Heat (实热) corresponds to acute inflammation with redness, swelling, and pain. Deficient Heat (虚热) corresponds to low-grade, chronic inflammation with dry heat sensations. Damp-Heat (湿热) — sticky, chronic inflammation with discharge (common in skin and digestive issues). Dietary approaches overlap significantly: both systems recommend anti-inflammatory foods like omega-3 rich fish, leafy greens, berries, and turmeric. TCM adds constitutional specificity — what reduces heat in one person may not work for another."
           },
           {
             "title": "Gut Health: One Concept, Two Paradigms",
             "summary": "How TCM Spleen-Stomach theory aligns with modern microbiome research.",
-            "icon": "🦠"
+            "icon": "🦠",
+            "detail": "Modern gut health focuses on the microbiome — the trillions of bacteria living in your digestive tract. TCM's concept of Spleen-Stomach function (脾胃功能) covers remarkably similar ground but from a different angle. The Spleen's \"transform and transport\" (运化) function parallels the microbiome's role in breaking down food and producing nutrients. TCM's \"Dampness\" (湿) patterns often correspond to gut dysbiosis — the feeling of stagnation, bloating, and sticky stools. Both paradigms agree: whole foods, fermented foods, limited sugar, and stress management are foundational. TCM adds the insight that your specific gut issues relate to your constitutional type."
           }
         ]
       }
-    ]
+    ],
+    "showLess": "Show Less"
   },
   "login": {
     "title": "Welcome",

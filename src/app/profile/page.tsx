@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { constitutions } from "@/data/constitutions";
 import { getQuizResult, storeBodyData, getBodyData, clearQuizResult } from "@/lib/utils";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -19,6 +20,13 @@ export default function ProfilePage() {
     sleep: "",
   });
   const [saved, setSaved] = useState(false);
+  const { t } = useTranslation();
+
+  const fields = t("profile.fields");
+  const parsedFields = typeof fields === "string" ? {} : fields as Record<string, string>;
+
+  const links = t("profile.links");
+  const parsedLinks = typeof links === "string" ? [] : links as any[];
 
   useEffect(() => {
     setMounted(true);
@@ -52,7 +60,7 @@ export default function ProfilePage() {
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-gray-50">
       <div className="max-w-3xl mx-auto px-4 py-12">
-        <h1 className="font-serif text-3xl font-bold text-gray-900 mb-8 text-center">👤 My Profile</h1>
+        <h1 className="font-serif text-3xl font-bold text-gray-900 mb-8 text-center">👤 {t("profile.title")}</h1>
 
         {/* Constitution Info */}
         {constitution && (
@@ -63,13 +71,13 @@ export default function ProfilePage() {
                 <h2 className="text-xl font-semibold text-gray-900">
                   {constitution.name_en} · {constitution.name_zh}
                 </h2>
-                <p className="text-sm text-gray-400">Your primary body constitution</p>
+                <p className="text-sm text-gray-400">{t("profile.primaryLabel")}</p>
               </div>
               <button
                 onClick={handleRetakeQuiz}
                 className="px-4 py-2 text-sm border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors"
               >
-                Retake Quiz
+                {t("profile.retakeQuiz")}
               </button>
             </div>
           </div>
@@ -77,81 +85,81 @@ export default function ProfilePage() {
 
         {/* Body Data Form */}
         <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">📏 Body Data</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">{t("profile.bodyData")}</h2>
           <p className="text-sm text-gray-400 mb-6">
-            Optional: Your body data helps us provide more accurate personalized recommendations.
+            {t("profile.bodyDataHint")}
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Height (cm)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{parsedFields.height || "Height (cm)"}</label>
               <input
                 type="number"
                 value={formData.height}
                 onChange={(e) => handleChange("height", e.target.value)}
-                placeholder="e.g. 168"
+                placeholder={parsedFields.heightPlaceholder || "e.g. 168"}
                 className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 text-gray-800"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Weight (kg)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{parsedFields.weight || "Weight (kg)"}</label>
               <input
                 type="number"
                 value={formData.weight}
                 onChange={(e) => handleChange("weight", e.target.value)}
-                placeholder="e.g. 62"
+                placeholder={parsedFields.weightPlaceholder || "e.g. 62"}
                 className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 text-gray-800"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{parsedFields.age || "Age"}</label>
               <input
                 type="number"
                 value={formData.age}
                 onChange={(e) => handleChange("age", e.target.value)}
-                placeholder="e.g. 32"
+                placeholder={parsedFields.agePlaceholder || "e.g. 32"}
                 className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 text-gray-800"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{parsedFields.gender || "Gender"}</label>
               <select
                 value={formData.gender}
                 onChange={(e) => handleChange("gender", e.target.value)}
                 className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 text-gray-800 bg-white"
               >
-                <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option value="">{parsedFields.genderPlaceholder || "Select"}</option>
+                <option value="male">{parsedFields.genderMale || "Male"}</option>
+                <option value="female">{parsedFields.genderFemale || "Female"}</option>
+                <option value="other">{parsedFields.genderOther || "Other"}</option>
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Exercise Frequency</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{parsedFields.exercise || "Exercise Frequency"}</label>
               <select
                 value={formData.exercise}
                 onChange={(e) => handleChange("exercise", e.target.value)}
                 className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 text-gray-800 bg-white"
               >
-                <option value="">Select</option>
-                <option value="rarely">几乎不 (Rarely)</option>
-                <option value="1-2">每周1-2次 (1-2/week)</option>
-                <option value="3-5">每周3-5次 (3-5/week)</option>
-                <option value="daily">每天 (Daily)</option>
+                <option value="">{parsedFields.exercisePlaceholder || "Select"}</option>
+                <option value="rarely">{parsedFields.exerciseRarely || "几乎不 (Rarely)"}</option>
+                <option value="1-2">{parsedFields.exercise1to2 || "每周1-2次 (1-2/week)"}</option>
+                <option value="3-5">{parsedFields.exercise3to5 || "每周3-5次 (3-5/week)"}</option>
+                <option value="daily">{parsedFields.exerciseDaily || "每天 (Daily)"}</option>
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Sleep Duration</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{parsedFields.sleep || "Sleep Duration"}</label>
               <select
                 value={formData.sleep}
                 onChange={(e) => handleChange("sleep", e.target.value)}
                 className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 text-gray-800 bg-white"
               >
-                <option value="">Select</option>
-                <option value="<5">少于5小时 (&lt;5h)</option>
-                <option value="5-6">5-6小时</option>
-                <option value="7-8">7-8小时</option>
-                <option value=">8">多于8小时 (&gt;8h)</option>
+                <option value="">{parsedFields.sleepPlaceholder || "Select"}</option>
+                <option value="<5">{parsedFields.sleepLess5 || "少于5小时 (<5h)"}</option>
+                <option value="5-6">{parsedFields.sleep5to6 || "5-6小时"}</option>
+                <option value="7-8">{parsedFields.sleep7to8 || "7-8小时"}</option>
+                <option value=">8">{parsedFields.sleepMore8 || "多于8小时 (>8h)"}</option>
               </select>
             </div>
           </div>
@@ -164,19 +172,19 @@ export default function ProfilePage() {
                 : "bg-emerald-600 text-white hover:bg-emerald-700"
             }`}
           >
-            {saved ? "✅ Saved!" : "Save Body Data"}
+            {saved ? t("profile.savedButton") : t("profile.saveButton")}
           </button>
         </div>
 
         {/* Quick Links */}
         <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">🔗 Quick Links</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">{t("profile.quickLinks")}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
-              { href: "/dashboard", label: "My Dashboard", icon: "🏠" },
-              { href: "/food-scan", label: "Food Scanner", icon: "📷" },
-              { href: "/daily", label: "Daily Tips", icon: "🌅" },
-              { href: "/learn", label: "Learn TCM", icon: "📖" },
+              { href: "/dashboard", icon: "🏠" },
+              { href: "/food-scan", icon: "📷" },
+              { href: "/daily", icon: "🌅" },
+              { href: "/learn", icon: "📖" },
             ].map((link, i) => (
               <Link
                 key={i}
@@ -184,7 +192,7 @@ export default function ProfilePage() {
                 className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
               >
                 <span className="text-xl">{link.icon}</span>
-                <span className="font-medium text-gray-700 text-sm">{link.label}</span>
+                <span className="font-medium text-gray-700 text-sm">{parsedLinks[i]?.label || ""}</span>
               </Link>
             ))}
           </div>

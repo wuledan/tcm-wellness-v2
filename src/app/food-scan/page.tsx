@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { getQuizResult } from "@/lib/utils";
 import { getMatchLevel, matchLevelConfig, type MatchLevel, type TcmProperty } from "@/data/foods";
 import { getConstitutionStyle } from "@/components/ConstitutionBadge";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface AnalysisResult {
   foodNameEn: string;
@@ -116,6 +117,7 @@ export default function FoodScanPage() {
   const [scanCount, setScanCount] = useState(0);
   const [manualFood, setManualFood] = useState("");
   const [showManual, setShowManual] = useState(false);
+  const { t, locale } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
@@ -156,7 +158,7 @@ export default function FoodScanPage() {
       const res = await fetch("/api/food/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: imageData, constitutionType: primaryType }),
+        body: JSON.stringify({ image: imageData, constitutionType: primaryType, language: locale }),
       });
 
       if (res.ok) {
@@ -218,7 +220,7 @@ export default function FoodScanPage() {
       );
     }
     if (!found) {
-      alert("Food not found. Try another name or upload a photo.");
+      alert(t("foodScan.foodNotFound"));
       return;
     }
 
@@ -262,14 +264,14 @@ export default function FoodScanPage() {
     <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-b from-emerald-50 via-white to-white">
       <div className="max-w-2xl mx-auto px-4 py-12">
         <div className="text-center mb-8">
-          <h1 className="font-serif text-3xl font-bold text-gray-900 mb-2">🍽️ Food Scanner</h1>
-          <p className="text-gray-500">Snap a photo or type a food name to check its TCM compatibility</p>
+          <h1 className="font-serif text-3xl font-bold text-gray-900 mb-2">🍽️ {t("foodScan.title")}</h1>
+          <p className="text-gray-500">{t("foodScan.subtitle")}</p>
         </div>
 
         {/* Scan count */}
         <div className="text-center mb-6">
           <span className="inline-flex items-center gap-1 text-sm text-gray-400">
-            📸 Today&apos;s scans: {scanCount} / 3 (Free)
+            📸 {t("foodScan.scanCount").replace("{count}", String(scanCount))}
           </span>
         </div>
 
@@ -281,8 +283,8 @@ export default function FoodScanPage() {
               className="border-2 border-dashed border-gray-200 rounded-xl p-12 text-center cursor-pointer hover:border-emerald-300 hover:bg-emerald-50/30 transition-all"
             >
               <span className="text-5xl block mb-4">📷</span>
-              <p className="text-gray-700 font-medium mb-1">Take or upload a food photo</p>
-              <p className="text-gray-400 text-sm">Click to select an image</p>
+              <p className="text-gray-700 font-medium mb-1">{t("foodScan.uploadHint")}</p>
+              <p className="text-gray-400 text-sm">{t("foodScan.uploadSubtext")}</p>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -309,20 +311,20 @@ export default function FoodScanPage() {
         {/* OR separator */}
         <div className="flex items-center gap-4 mb-6">
           <div className="flex-1 h-px bg-gray-200" />
-          <span className="text-sm text-gray-400">OR</span>
+          <span className="text-sm text-gray-400">{t("foodScan.orDivider")}</span>
           <div className="flex-1 h-px bg-gray-200" />
         </div>
 
         {/* Manual food entry */}
         <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
-          <h3 className="font-medium text-gray-900 mb-3">🔍 Type a food name</h3>
+          <h3 className="font-medium text-gray-900 mb-3">{t("foodScan.manualTitle")}</h3>
           <div className="flex gap-2">
             <input
               type="text"
               value={manualFood}
               onChange={(e) => setManualFood(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleManualSearch()}
-              placeholder="e.g. 红烧肉, 西瓜, 姜茶..."
+              placeholder={t("foodScan.manualPlaceholder")}
               className="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 text-gray-800"
             />
             <button
@@ -330,7 +332,7 @@ export default function FoodScanPage() {
               disabled={!manualFood.trim() || isAnalyzing}
               className="px-6 py-2.5 bg-emerald-600 text-white rounded-xl font-medium hover:bg-emerald-700 disabled:bg-gray-200 disabled:cursor-not-allowed transition-colors"
             >
-              {isAnalyzing ? "..." : "Check"}
+              {isAnalyzing ? t("foodScan.checkingButton") : t("foodScan.checkButton")}
             </button>
           </div>
           <div className="flex flex-wrap gap-1.5 mt-3">
@@ -354,8 +356,8 @@ export default function FoodScanPage() {
         {isAnalyzing && (
           <div className="bg-white rounded-2xl p-10 border border-gray-100 shadow-sm text-center">
             <div className="animate-spin text-4xl mb-4 inline-block">🔍</div>
-            <p className="text-gray-700 font-medium">Analyzing your food...</p>
-            <p className="text-gray-400 text-sm mt-1">Identifying ingredients and TCM properties</p>
+            <p className="text-gray-700 font-medium">{t("foodScan.loadingTitle")}</p>
+            <p className="text-gray-400 text-sm mt-1">{t("foodScan.loadingSubtext")}</p>
           </div>
         )}
 
@@ -368,7 +370,7 @@ export default function FoodScanPage() {
                 <div>
                   <h2 className="text-xl font-bold text-gray-900">{result.foodNameEn}</h2>
                   <p className="text-sm text-gray-400">{result.foodNameZh}</p>
-                  <p className="text-sm text-gray-400 mt-1">≈{result.calories}kcal per serving</p>
+                  <p className="text-sm text-gray-400 mt-1">{t("foodScan.result.kcal").replace("{kcal}", String(result.calories))}</p>
                 </div>
                 <div className="text-right">
                   <span
@@ -403,7 +405,7 @@ export default function FoodScanPage() {
             {/* Alternative */}
             <div className="p-6 bg-green-50">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-green-600 font-medium text-sm">💡 Alternative Suggestion</span>
+                <span className="text-green-600 font-medium text-sm">{t("foodScan.result.alternative")}</span>
               </div>
               <div className="flex items-start justify-between">
                 <div>
@@ -430,10 +432,10 @@ export default function FoodScanPage() {
                 onClick={() => { setSelectedImage(null); setResult(null); setManualFood(""); }}
                 className="flex-1 py-2.5 border border-gray-200 rounded-xl text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors"
               >
-                Scan Another
+                {t("foodScan.result.scanAnother")}
               </button>
               <button className="flex-1 py-2.5 bg-emerald-600 text-white rounded-xl text-sm font-medium hover:bg-emerald-700 transition-colors">
-                🤖 Ask AI: Today&apos;s Lunch
+                {t("foodScan.result.askAi")}
               </button>
             </div>
           </div>
@@ -442,8 +444,7 @@ export default function FoodScanPage() {
         {/* Info tip */}
         <div className="mt-8 text-center">
           <p className="text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
-            ⚕️ Food analysis is for educational purposes only. Not medical advice.
-            Results are simulated for MVP demo. In production, AI vision analysis provides real-time identification.
+            {t("foodScan.disclaimer")}
           </p>
         </div>
       </div>
