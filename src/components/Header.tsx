@@ -97,6 +97,12 @@ export default function Header() {
                     {session.user.name}
                   </Link>
                 )}
+                <Link
+                  href="/admin/feedback"
+                  className="text-sm text-amber-600 hover:text-amber-700 transition-colors"
+                >
+                  📊 Admin
+                </Link>
                 <button
                   onClick={() => signOut({ callbackUrl: "/" })}
                   className="text-sm text-gray-400 hover:text-red-500 transition-colors"
@@ -167,6 +173,7 @@ export default function Header() {
                 {session?.user?.name && (
                   <Link href="/profile" onClick={() => setMobileOpen(false)} className="block text-sm text-gray-500">{session.user.name}</Link>
                 )}
+                <Link href="/admin/feedback" onClick={() => setMobileOpen(false)} className="block text-sm text-amber-600">📊 Admin</Link>
                 <button onClick={() => { setMobileOpen(false); signOut({ callbackUrl: "/" }); }} className="block text-sm text-red-400">{t("header.auth.logout")}</button>
               </div>
             ) : (

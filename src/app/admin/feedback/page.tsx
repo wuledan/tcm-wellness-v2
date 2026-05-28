@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSession, signIn } from "next-auth/react";
 import { useTranslation } from "@/contexts/LanguageContext";
 
 interface FeedbackEntry {
@@ -32,9 +33,28 @@ function formatTime(iso: string): string {
 
 export default function AdminFeedbackPage() {
   const { t } = useTranslation();
+  const { data: session, status } = useSession();
   const [entries, setEntries] = useState<FeedbackEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  // Require authentication
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      signIn();
+    }
+  }, [status]);
+
+  if (status !== "authenticated") {
+    return (
+      <div className="min-h-[calc(100vh-4rem)] bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full mx-auto" />
+          <p className="text-sm text-gray-400 mt-4">Sign in required...</p>
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     fetch("/api/feedback")
