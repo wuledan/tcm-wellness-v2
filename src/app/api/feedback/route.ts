@@ -1,5 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-import { addFeedback, readFeedback } from "@/lib/feedback";
+import { Redis } from "@upstash/redis";
+
+interface FeedbackEntry {
+  id: string;
+  rating: number;
+  category: string;
+  message: string;
+  email?: string;
+  page: string;
+  timestamp: string;
+}
+
+const redis = new Redis({
+  url: process.env.KV_REST_API_URL || "",
+  token: process.env.KV_REST_API_TOKEN || "",
+});
+
+const FEEDBACK_KEY = "tcm:feedback";
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,7 +40,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    const entry = {
+    const entry: FeedbackEntry = {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
       rating,
       category,
@@ -33,10 +50,8 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     };
 
-    await addFeedback(entry);
-
-    // Also log for Vercel log drain
-    console.log("[FEEDBACK]", JSON.stringify(entry));
+    // Store in Redis (list with newest first prepend)
+    await redis.lpush(FEEDBACK_KEY, entry);
 
     return NextResponse.json({ success: true, id: entry.id }, { status: 201 });
   } catch {
@@ -45,8 +60,11 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET() {
-  const entries = await readFeedback();
-  // Return newest first
-  const sorted = [...entries].reverse();
-  return NextResponse.json({ feedback: sorted, total: sorted.length });
+  try {
+    // Get all feedback entries, newest first (LPUSH → index 0 is newest)
+    const feedback = await redis.lrange<FeedbackEntry>(FEEDBACK_KEY, 0, -1);
+    return NextResponse.json({ feedback, total: feedback.length });
+  } catch {
+    return NextResponse.json({ feedback: [], total: 0 });
+  }
 }
