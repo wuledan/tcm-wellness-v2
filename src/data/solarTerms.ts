@@ -128,7 +128,7 @@ function computeTermsForYear(year: number): SolarTerm[] {
   }));
 }
 
-// --- Current year terms (recomputed once per module load, then cached) ---
+// --- Current year terms (cached, recomputed once per year) ---
 
 let cachedYear = 0;
 let cachedTerms: SolarTerm[] = [];
@@ -141,31 +141,6 @@ export function getSolarTerms(): SolarTerm[] {
   }
   return cachedTerms;
 }
-
-// For backward compatibility — re-export current year's terms
-export const solarTerms = new Proxy({} as SolarTerm[], {
-  get(_target, prop) {
-    return getSolarTerms()[prop as any];
-  },
-  getOwnPropertyDescriptor(_target, prop) {
-    const terms = getSolarTerms();
-    if (prop in terms) {
-      return { value: terms[prop as any], writable: false, enumerable: true, configurable: true };
-    }
-    return undefined;
-  },
-  ownKeys() {
-    return Reflect.ownKeys(getSolarTerms());
-  },
-}) as SolarTerm[];
-
-// Make iterable
-Object.defineProperty(solarTerms, Symbol.iterator, {
-  value: function* () { yield* getSolarTerms(); }
-});
-Object.defineProperty(solarTerms, 'length', {
-  get() { return getSolarTerms().length; }
-});
 
 // --- Get current solar term ---
 

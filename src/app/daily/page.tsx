@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { solarTerms, getCurrentSolarTerm, type SolarTerm } from "@/data/solarTerms";
+import { getCurrentSolarTerm, getSolarTerms, type SolarTerm } from "@/data/solarTerms";
 import { getQuizResult } from "@/lib/utils";
 import { constitutions } from "@/data/constitutions";
 import { useTranslation } from "@/contexts/LanguageContext";
@@ -84,7 +84,7 @@ export default function DailyPage() {
         <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
           <h2 className="font-semibold text-gray-900 mb-4">{t("daily.solarTerm.calendarTitle")}</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2">
-            {solarTerms.map((term) => (
+            {getSolarTerms().map((term) => (
               <div
                 key={term.id}
                 className={`p-3 rounded-lg text-center text-sm border transition-colors ${
