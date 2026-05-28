@@ -40,16 +40,26 @@ export function getCurrentSolarTerm(): SolarTerm {
   const month = now.getMonth() + 1;
   const day = now.getDate();
 
+  const MONTHS: Record<string, number> = {
+    Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6,
+    Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12
+  };
+
+  const todayNum = month * 100 + day;
   let latest: SolarTerm | null = null;
+  let latestNum = 0;
+
   for (const term of solarTerms) {
     const [m, d] = term.date.split(" ");
-    const monthNum = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].indexOf(m) + 1;
-    const dayNum = parseInt(d);
-    // Skip January terms (小寒/大寒) unless we're in January — they belong to the next solar year
-    if (monthNum === 1 && month !== 1) continue;
-    if (month > monthNum || (month === monthNum && day >= dayNum)) {
+    const termNum = MONTHS[m] * 100 + parseInt(d);
+
+    // Term has started or is today
+    if (termNum <= todayNum && termNum > latestNum) {
       latest = term;
+      latestNum = termNum;
     }
   }
-  return latest || solarTerms[0];
+
+  // Fallback: Jan 1-5 or Feb 1-3 — still in 大寒 (last term of previous solar cycle)
+  return latest || solarTerms[23];
 }
