@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "@/contexts/LanguageContext";
 
 interface FeedbackEntry {
@@ -38,25 +38,9 @@ export default function AdminFeedbackPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Require authentication
   useEffect(() => {
-    if (status === "unauthenticated") {
-      signIn();
-    }
-  }, [status]);
+    if (status !== "authenticated") return;
 
-  if (status !== "authenticated") {
-    return (
-      <div className="min-h-[calc(100vh-4rem)] bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full mx-auto" />
-          <p className="text-sm text-gray-400 mt-4">Sign in required...</p>
-        </div>
-      </div>
-    );
-  }
-
-  useEffect(() => {
     fetch("/api/feedback")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch");
@@ -65,8 +49,38 @@ export default function AdminFeedbackPage() {
       .then((data) => setEntries(data.feedback || []))
       .catch(() => setError("Failed to load feedback"))
       .finally(() => setLoading(false));
-  }, []);
+  }, [status]);
 
+  // Loading or not authenticated
+  if (status === "loading") {
+    return (
+      <div className="min-h-[calc(100vh-4rem)] bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full mx-auto" />
+          <p className="text-sm text-gray-400 mt-4">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === "unauthenticated") {
+    return (
+      <div className="min-h-[calc(100vh-4rem)] bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-4xl mb-4">🔒</div>
+          <p className="text-gray-600 mb-4">Please sign in to view feedback.</p>
+          <Link
+            href="/login?callbackUrl=/admin/feedback"
+            className="inline-block bg-emerald-600 text-white px-6 py-2 rounded-xl font-medium hover:bg-emerald-700 transition-colors"
+          >
+            Sign In
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Authenticated — show feedback
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <Link href="/" className="text-sm text-emerald-600 hover:text-emerald-700 mb-6 inline-block">
