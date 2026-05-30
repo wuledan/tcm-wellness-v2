@@ -1,27 +1,36 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getCurrentSolarTerm, getSolarTerms, type SolarTerm } from "@/data/solarTerms";
+import { getCurrentSolarTerm, getSolarTerms } from "@/data/solarTerms";
 import { getQuizResult } from "@/lib/utils";
 import { constitutions } from "@/data/constitutions";
 import { useTranslation } from "@/contexts/LanguageContext";
+import { formatShanghaiDate, getShanghaiMMDD, getShanghaiYear } from "@/lib/date";
 
 export default function DailyPage() {
   const [mounted, setMounted] = useState(false);
   const { t } = useTranslation();
+  // Track current date for reactivity
+  const [dateKey, setDateKey] = useState(0);
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+    // Re-render every minute to keep date fresh
+    const timer = setInterval(() => setDateKey((k) => k + 1), 60000);
+    return () => clearInterval(timer);
+  }, []);
 
   const tips = t("daily.tips");
   const parsedTips = typeof tips === "string" ? [] : tips as string[];
 
   const result = mounted ? getQuizResult() : null;
   const constitution = result ? constitutions.find((c) => c.id === result.primaryType) : null;
+
+  // Always compute from current time (mounted or not)
   const currentTerm = getCurrentSolarTerm();
-  const today = new Date();
-  const startOfYear = new Date(today.getFullYear(), 0, 0).getTime();
-  const dayOfYear = Math.floor((today.getTime() - startOfYear) / 86400000);
-  const tipIndex = dayOfYear % parsedTips.length;
+  const shanghaiMMDD = getShanghaiMMDD();
+  const dayOfYear = getDayOfYear();
+  const tipIndex = dayOfYear % (parsedTips.length || 1);
   const currentTip = parsedTips[tipIndex] || "";
 
   return (
@@ -40,7 +49,7 @@ export default function DailyPage() {
             </span>
             <span className="text-sm text-gray-300">·</span>
             <span className="text-sm text-gray-400">
-              {today.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
+              {formatShanghaiDate("en-US")}
             </span>
           </div>
           <h2 className="font-serif text-2xl font-bold text-gray-900 mb-4">{t("daily.tipTitle")}</h2>
@@ -105,4 +114,27 @@ export default function DailyPage() {
       </div>
     </div>
   );
+}
+
+/** Compute day-of-year using Shanghai timezone */
+function getDayOfYear(): number {
+  const now = new Date();
+  try {
+    const formatter = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Shanghai",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+    const parts = formatter.formatToParts(now);
+    const year = parseInt(parts.find((p) => p.type === "year")?.value || "0", 10);
+    const month = parseInt(parts.find((p) => p.type === "month")?.value || "0", 10);
+    const day = parseInt(parts.find((p) => p.type === "day")?.value || "0", 10);
+    const startOfYear = new Date(year, 0, 0).getTime();
+    const shanghaiDate = new Date(year, month - 1, day).getTime();
+    return Math.floor((shanghaiDate - startOfYear) / 86400000);
+  } catch {
+    const startOfYear = new Date(now.getFullYear(), 0, 0).getTime();
+    return Math.floor((now.getTime() - startOfYear) / 86400000);
+  }
 }

@@ -133,8 +133,36 @@ function computeTermsForYear(year: number): SolarTerm[] {
 let cachedYear = 0;
 let cachedTerms: SolarTerm[] = [];
 
+function getShanghaiYear(): number {
+  try {
+    const d = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Shanghai",
+      year: "numeric",
+    }).formatToParts(new Date());
+    return parseInt(d.find((p) => p.type === "year")?.value || "0", 10);
+  } catch {
+    return new Date().getFullYear();
+  }
+}
+
+function getShanghaiMMDD(): number {
+  try {
+    const d = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Shanghai",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(new Date());
+    const m = parseInt(d.find((p) => p.type === "month")?.value || "0", 10);
+    const day = parseInt(d.find((p) => p.type === "day")?.value || "0", 10);
+    return m * 100 + day;
+  } catch {
+    const now = new Date();
+    return (now.getMonth() + 1) * 100 + now.getDate();
+  }
+}
+
 export function getSolarTerms(): SolarTerm[] {
-  const year = new Date().getFullYear();
+  const year = getShanghaiYear();
   if (year !== cachedYear) {
     cachedTerms = computeTermsForYear(year);
     cachedYear = year;
@@ -145,10 +173,7 @@ export function getSolarTerms(): SolarTerm[] {
 // --- Get current solar term ---
 
 export function getCurrentSolarTerm(): SolarTerm {
-  const now = new Date();
-  const month = now.getMonth() + 1;
-  const day = now.getDate();
-  const todayNum = month * 100 + day;
+  const todayNum = getShanghaiMMDD();
 
   const terms = getSolarTerms();
   const MONTHS: Record<string, number> = {
