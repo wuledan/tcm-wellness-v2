@@ -85,7 +85,7 @@ Return ONLY valid JSON in this exact format (no markdown, no code fences):
     const confidence = typeof result.confidence === "number" ? result.confidence : 0.5;
 
     // Save quiz attempt to DB (fire-and-forget to avoid slowing response)
-    if (session?.user?.id) {
+    if (session?.user?.id && prisma) {
       prisma.quizAttempt
         .create({
           data: {

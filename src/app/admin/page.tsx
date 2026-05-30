@@ -20,6 +20,7 @@ import {
 } from "recharts";
 
 interface Stats {
+  dbAvailable?: boolean;
   totalUsers: number;
   dailyNewUsers: { date: string; count: number }[];
   weeklyNewUsers: { date: string; count: number }[];
@@ -132,6 +133,33 @@ export default function AdminPage() {
   }
 
   if (!stats) return null;
+
+  // Show DB setup message when database is not configured
+  if (stats.dbAvailable === false) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center max-w-lg">
+          <p className="text-4xl mb-4">🗄️</p>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Database Not Configured</h2>
+          <p className="text-gray-500 mb-4">
+            The admin dashboard requires a PostgreSQL database. Please set up Neon Postgres and add
+            the <code className="bg-gray-100 px-1.5 py-0.5 rounded text-sm text-emerald-700">DATABASE_URL</code> and{" "}
+            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-sm text-emerald-700">DIRECT_URL</code> environment variables on Vercel.
+          </p>
+          <div className="bg-gray-50 rounded-lg p-4 text-left text-sm">
+            <p className="font-medium text-gray-700 mb-2">Quick Setup:</p>
+            <ol className="list-decimal list-inside space-y-1 text-gray-500">
+              <li>Go to Vercel Dashboard &rarr; Storage &rarr; Create Database</li>
+              <li>Choose Neon Postgres (free tier)</li>
+              <li>Copy the DATABASE_URL and DIRECT_URL to env vars</li>
+              <li>Redeploy the project</li>
+              <li>Run db:push to create tables</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">

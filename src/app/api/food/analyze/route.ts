@@ -126,7 +126,7 @@ Respond in ${replyLang}. Return ONLY valid JSON:
     const tcmProperty = tcmResult.tcm_property || "neutral";
 
     // Save food scan to DB (fire-and-forget)
-    if (session?.user?.id) {
+    if (session?.user?.id && prisma) {
       prisma.foodScan
         .create({
           data: {

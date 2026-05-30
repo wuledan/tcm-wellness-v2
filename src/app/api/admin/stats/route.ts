@@ -11,6 +11,22 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
+    if (!prisma) {
+      return NextResponse.json({
+        dbAvailable: false,
+        error: "Database not configured. Set DATABASE_URL environment variable.",
+        totalUsers: 0,
+        dailyNewUsers: [],
+        weeklyNewUsers: [],
+        activeUsers: 0,
+        totalQuizAttempts: 0,
+        totalFoodScans: 0,
+        constitutionDistribution: [],
+        languageDistribution: [],
+        recentSignups: [],
+      });
+    }
+
     // Total users
     const totalUsers = await prisma.user.count();
 
@@ -111,6 +127,7 @@ export async function GET() {
     });
 
     return NextResponse.json({
+      dbAvailable: true,
       totalUsers,
       dailyNewUsers,
       weeklyNewUsers,

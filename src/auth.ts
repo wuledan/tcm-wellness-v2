@@ -1,10 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { prisma } from "@/lib/prisma";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma) as any,
   providers: [
     Credentials({
       name: "credentials",
@@ -20,27 +17,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const name = (credentials.name as string) || email.split("@")[0];
         const language = (credentials.language as string) || "en";
 
-        // Upsert user in DB
-        const user = await prisma.user.upsert({
-          where: { email },
-          update: {
-            name,
-            language,
-          },
-          create: {
-            email,
-            name,
-            language,
-            role: "user",
-          },
-        });
-
         return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-          language: user.language,
+          id: email,
+          email,
+          name,
+          role: "user",
+          language,
         };
       },
     }),
