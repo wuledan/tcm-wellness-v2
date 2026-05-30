@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 
 const QWEN_API_KEY = "sk-16d61d52eba94add8bd6968c8c744df6";
 const QWEN_API_BASE = "https://dashscope.aliyuncs.com/compatible-mode/v1";
@@ -8,6 +10,7 @@ const DS_API_BASE = "https://opencode.ai/zen/go/v1";
 
 export async function POST(request: NextRequest) {
   try {
+    const session = await auth();
     const body = await request.json();
     const { image, constitutionType, language } = body;
 
@@ -117,14 +120,34 @@ Respond in ${replyLang}. Return ONLY valid JSON:
       return NextResponse.json({ error: "Failed to parse TCM analysis" }, { status: 500 });
     }
 
+    const foodName = foodInfo.name_en || "Unknown Food";
+    const foodNameZh = foodInfo.name_zh || "";
+    const matchLevel = tcmResult.match_level || "caution";
+    const tcmProperty = tcmResult.tcm_property || "neutral";
+
+    // Save food scan to DB (fire-and-forget)
+    if (session?.user?.id) {
+      prisma.foodScan
+        .create({
+          data: {
+            userId: session.user.id,
+            foodName,
+            foodNameZh,
+            matchLevel,
+            tcmProperty,
+          },
+        })
+        .catch((err) => console.error("Failed to save food scan:", err));
+    }
+
     // ========== Combine results ==========
     return NextResponse.json({
-      food_name: foodInfo.name_en || "Unknown Food",
-      food_name_zh: foodInfo.name_zh || "未知食物",
+      food_name: foodName,
+      food_name_zh: foodNameZh,
       estimated_calories: foodInfo.estimated_calories_per_100g || 100,
-      tcm_property: tcmResult.tcm_property || "neutral",
+      tcm_property: tcmProperty,
       tcm_property_zh: tcmResult.tcm_property_zh || "平",
-      match_level: tcmResult.match_level || "caution",
+      match_level: matchLevel,
       reason_en: tcmResult.reason_en || "",
       reason_zh: tcmResult.reason_zh || "",
       alternative_name: tcmResult.alternative_name || "",

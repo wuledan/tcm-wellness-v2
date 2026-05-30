@@ -10,7 +10,7 @@ function LoginForm() {
   const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,6 +18,7 @@ function LoginForm() {
     await signIn("credentials", {
       email: email.trim(),
       name: name.trim() || email.trim().split("@")[0],
+      language: locale,
       callbackUrl,
     });
   };

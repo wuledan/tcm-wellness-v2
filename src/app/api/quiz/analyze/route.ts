@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 
 const API_KEY = "sk-f0T5tXizIYzrLDB5L5kDJ0pwpfqdoRNxqE22aopWktYwYEdIFaVHMSuQ10f9ahJC";
 const API_BASE = "https://opencode.ai/zen/go/v1";
@@ -20,6 +22,7 @@ Respond with a confidence score between 0 and 1 reflecting how certain you are a
 
 export async function POST(request: NextRequest) {
   try {
+    const session = await auth();
     const body = await request.json();
     const { answers, language } = body;
 
@@ -78,10 +81,27 @@ Return ONLY valid JSON in this exact format (no markdown, no code fences):
     const content = data.choices[0].message.content;
     const result = JSON.parse(content);
 
+    const primaryType = result.primary_type || "balanced";
+    const confidence = typeof result.confidence === "number" ? result.confidence : 0.5;
+
+    // Save quiz attempt to DB (fire-and-forget to avoid slowing response)
+    if (session?.user?.id) {
+      prisma.quizAttempt
+        .create({
+          data: {
+            userId: session.user.id,
+            constitution: primaryType,
+            answers,
+            confidence,
+          },
+        })
+        .catch((err) => console.error("Failed to save quiz attempt:", err));
+    }
+
     return NextResponse.json({
-      primary_type: result.primary_type || "balanced",
+      primary_type: primaryType,
       secondary_type: result.secondary_type || null,
-      confidence: typeof result.confidence === "number" ? result.confidence : 0.5,
+      confidence,
       summary_zh: result.summary_zh || "",
       summary_en: result.summary_en || "",
     });
