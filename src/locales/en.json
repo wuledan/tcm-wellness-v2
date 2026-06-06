@@ -316,6 +316,12 @@
             "summary": "Understanding internal heat and how to cool and nourish your body.",
             "icon": "🔥",
             "detail": "Yin Deficiency creates a sensation of internal heat — like a car engine running without enough coolant. You feel warm, especially in the palms and soles. Your throat and skin feel dry. You may experience night sweats and a thin, rapid pulse. Sleep is often disturbed, with vivid dreams. The Kidneys and Liver (肝肾) Yin need nourishment. Eat cooling, moistening foods: pears, lily bulb, white fungus, duck, and tofu. Avoid spicy foods, alcohol, and excessive exercise that causes sweating. Go to bed before 11 PM — nighttime is Yin time."
+          },
+          {
+            "title": "☀️ Damp-Heat (湿热质) — The Sticky Heat Type",
+            "summary": "Why you feel hot, heavy, and irritable — and how to cool down and dry out from within.",
+            "icon": "☀️",
+            "detail": "Damp-Heat (湿热质) is one of the most recognizable TCM constitution types. It's a combination of Dampness (fluid stagnation) and Heat (inflammation) in the body. Key signs: oily skin with persistent acne, a bitter taste in the mouth, sticky stools that are hard to flush, irritability, and a feeling of being weighed down. It affects approximately 10-15% of the population and is increasingly common in modern urban environments due to dietary habits (fried foods, alcohol, late-night eating) and lifestyle factors. The dietary strategy is to eat cooling, drying foods: bitter gourd, mung beans, coix seed, adzuki beans, celery, and green tea. Avoid: greasy foods, alcohol, spicy dishes, sugar, and late-night meals. Exercise that induces sweating (running, HIIT, swimming) helps drain Dampness. A warm, well-ventilated sleeping environment is essential. Read our full guide: Damp-Heat Body Type — Complete Guide."
           }
         ]
       },
@@ -376,6 +382,18 @@
             "summary": "How TCM Spleen-Stomach theory aligns with modern microbiome research.",
             "icon": "🦠",
             "detail": "Modern gut health focuses on the microbiome — the trillions of bacteria living in your digestive tract. TCM's concept of Spleen-Stomach function (脾胃功能) covers remarkably similar ground but from a different angle. The Spleen's \"transform and transport\" (运化) function parallels the microbiome's role in breaking down food and producing nutrients. TCM's \"Dampness\" (湿) patterns often correspond to gut dysbiosis — the feeling of stagnation, bloating, and sticky stools. Both paradigms agree: whole foods, fermented foods, limited sugar, and stress management are foundational. TCM adds the insight that your specific gut issues relate to your constitutional type."
+          }
+        ]
+      },
+      {
+        "title": "Food & Herbs",
+        "subtitle": "药食同源 — TCM ingredients explained",
+        "articles": [
+          {
+            "title": "Goji Berries (枸杞): TCM's Ancient Superfood",
+            "summary": "How 2,000 years of TCM use and modern science align on goji berry benefits.",
+            "icon": "🫐",
+            "detail": "Goji berries (枸杞 / Gǒu Qǐ) are one of the most scientifically validated herbs in TCM. Used for over 2,000 years to nourish Liver and Kidney Yin, brighten vision, and support longevity. Modern research confirms: they are rich in Lycium barbarum polysaccharides (LBPs) — powerful antioxidants — and zeaxanthin, which protects the macula of the eye. Studies show goji improves immune function, supports metabolic health, and may have neuroprotective effects. The classic TCM formula Qi Ju Di Huang Wan (杞菊地黄丸) combines goji with chrysanthemum for vision support. Daily dosage: 10-20g dried berries. Best consumed steeped in hot water, in soups, or added to congee. Avoid during acute infections. Read our full guide: Goji Berries in TCM."
           }
         ]
       }
