@@ -280,7 +280,7 @@
       "askAi": "🤖 Hỏi AI: Bữa trưa hôm nay"
     },
     "foodNotFound": "Không tìm thấy thực phẩm trong cơ sở dữ liệu. Hãy thử tên khác hoặc tải lên ảnh.",
-    "disclaimer": "⚕️ Phân tích thực phẩm chỉ mang tính giáo dục. Không phải lời khuyên y tế. Kết quả được mô phỏng cho bản demo MVP."
+    "disclaimer": "⚕️ Phân tích thực phẩm chỉ mang tính giáo dục. Được hỗ trợ bởi AI. Không phải lời khuyên y tế."
   },
   "learn": {
     "title": "Tìm Hiểu TCM Sức Khỏe",

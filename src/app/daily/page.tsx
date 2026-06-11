@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { getCurrentSolarTerm, getSolarTerms } from "@/data/solarTerms";
 import { getQuizResult } from "@/lib/utils";
 import { constitutions } from "@/data/constitutions";
@@ -55,12 +56,24 @@ export default function DailyPage() {
           <h2 className="font-serif text-2xl font-bold text-gray-900 mb-4">{t("daily.tipTitle")}</h2>
           <p className="text-lg text-gray-700 leading-relaxed">{currentTip}</p>
 
-          {constitution && (
+          {constitution ? (
             <div className="mt-6 p-4 bg-emerald-50 rounded-xl border border-emerald-100">
               <p className="text-sm text-emerald-700">
                 <span className="font-medium">{t("daily.forYourBodyType").replace("{name}", constitution.name_en)}</span>
                 {constitution.lifestyle_tips[tipIndex % constitution.lifestyle_tips.length]}
               </p>
+            </div>
+          ) : (
+            <div className="mt-6 bg-amber-50 rounded-2xl p-6 border border-amber-100 shadow-sm text-center">
+              <p className="text-amber-800 font-medium text-lg mb-1">
+                🌿 Take our 2-minute body quiz to get personalized daily tips
+              </p>
+              <Link
+                href="/quiz"
+                className="inline-block mt-3 px-6 py-2.5 bg-amber-600 text-white rounded-xl font-medium hover:bg-amber-700 transition-all shadow-lg shadow-amber-200"
+              >
+                Take the Quiz →
+              </Link>
             </div>
           )}
         </div>

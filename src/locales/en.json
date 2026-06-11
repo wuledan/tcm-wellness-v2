@@ -280,7 +280,7 @@
       "askAi": "🤖 Ask AI: Today's Lunch"
     },
     "foodNotFound": "Food not found in our database. Try a different name or upload a photo.",
-    "disclaimer": "⚕️ Food analysis is for educational purposes only. Not medical advice. Results are simulated for MVP demo. In production, AI vision analysis provides real-time identification."
+    "disclaimer": "⚕️ Food analysis is for educational purposes only. Powered by AI. Not medical advice."
   },
   "learn": {
     "title": "Learn TCM Wellness",

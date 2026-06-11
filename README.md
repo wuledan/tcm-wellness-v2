@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TCM Wellness — tcmbody.com
+
+A Traditional Chinese Medicine (TCM) wellness platform that provides personalized constitution analysis, daily health tips aligned with solar terms, AI-powered food scanning, and educational content about TCM body types, herbs, and dietary therapy.
+
+## Features
+
+- **🧬 Body Constitution Quiz** — Take a quick 2-minute quiz to discover your TCM body type (9 constitutional types) with personalized diet, exercise, and lifestyle recommendations
+- **🌅 Daily Wellness Tips** — Get daily health suggestions tailored to your body type and current solar term, with a full 24-term solar calendar
+- **🍽️ AI Food Scan** — Upload food photos or search by name for TCM-based food analysis; AI identifies food properties (cold/cool/neutral/warm/hot) with constitution compatibility matching
+- **📊 Personal Dashboard** — Track your wellness journey, quiz history, and personalized recommendations
+- **📚 Learn** — Comprehensive guides on TCM body types, common herbs, dietary therapy, and seasonal wellness
+- **🌍 Multi-language** — English, Chinese (中文), Korean (한국어), Vietnamese (Tiếng Việt)
+
+## Tech Stack
+
+| Category | Technology |
+|----------|-----------|
+| Framework | [Next.js 16](https://nextjs.org/) (App Router) |
+| Styling | [Tailwind CSS 4](https://tailwindcss.com/) |
+| Authentication | [Auth.js](https://authjs.dev/) (next-auth v5) |
+| Database | [Prisma](https://www.prisma.io/) + [Neon](https://neon.tech/) (PostgreSQL) |
+| AI (Text) | DeepSeek V4 — quiz analysis, recommendations, food analysis |
+| AI (Vision) | Qwen-VL (Dashscope) — food image recognition |
+| Cache / Rate-limit | Upstash Redis |
+| Deployment | [Vercel](https://vercel.com/) |
+| Analytics | Vercel Analytics |
+
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `DEEPSEEK_API_KEY` | DeepSeek API key for AI-powered analysis |
+| `QWEN_API_KEY` | Dashscope/Qwen-VL API key for food image recognition |
+| `DATABASE_URL` | Neon PostgreSQL connection string |
+| `DIRECT_URL` | Direct (non-pooled) PostgreSQL connection string |
+| `AUTH_URL` | Deployment URL (e.g. `https://tcmbody.com`) |
+| `AUTH_SECRET` | NextAuth secret for session encryption |
+
+Copy `.env.local.example` to `.env.local` and fill in your values:
+
+```bash
+cp .env.local.example .env.local
+```
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Set up the database schema
+npx prisma db push
+
+# (Optional) Seed demo data
+npx prisma db seed
+
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Database Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npx prisma generate    # Generate Prisma client
+npx prisma db push     # Push schema to database
+npx prisma db seed     # Seed database
+npx prisma studio      # Open Prisma Studio GUI
+```
 
-## Learn More
+## Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The production build must pass with 0 errors before any deployment.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+Deployed on Vercel. Environment variables must be configured in the Vercel project settings.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push to the repository
+2. Connect the repository to Vercel
+3. Add all environment variables from `.env.local.example`
+4. Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```
+src/
+├── app/               # Next.js App Router pages and API routes
+│   ├── quiz/          # Body constitution quiz flow
+│   ├── daily/         # Daily wellness tips and solar terms
+│   ├── food-scan/     # AI food analysis
+│   ├── dashboard/     # User dashboard
+│   ├── learn/         # TCM educational content
+│   ├── login/         # Authentication page
+│   ├── profile/       # User profile
+│   └── admin/         # Admin panel
+├── components/        # Shared React components
+├── contexts/          # React contexts (LanguageContext)
+├── data/              # Static data (constitutions, foods, solar terms)
+├── lib/               # Utility functions and helpers
+└── locales/           # i18n translations (en, zh, ko, vi)
+```

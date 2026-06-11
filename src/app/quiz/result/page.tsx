@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { constitutions } from "@/data/constitutions";
 import { getQuizResult } from "@/lib/utils";
 import { foodNameZhToEn } from "@/data/foods";
@@ -10,6 +11,7 @@ import { useTranslation } from "@/contexts/LanguageContext";
 
 export default function QuizResultPage() {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [result, setResult] = useState<ReturnType<typeof getQuizResult>>(null);
   const [mounted, setMounted] = useState(false);
   const { t } = useTranslation();
@@ -158,6 +160,21 @@ export default function QuizResultPage() {
             </Link>
           </div>
         </div>
+
+        {/* Login prompt for anonymous users */}
+        {mounted && status !== "authenticated" && (
+          <div className="mt-6 bg-amber-50 rounded-2xl p-6 border border-amber-100 shadow-sm text-center">
+            <p className="text-amber-800 font-medium mb-1">
+              🔒 Sign in to save your results and get personalized daily recommendations
+            </p>
+            <Link
+              href="/login?callbackUrl=/quiz/result"
+              className="inline-block mt-3 px-6 py-2.5 bg-amber-600 text-white rounded-xl font-medium hover:bg-amber-700 transition-all shadow-lg shadow-amber-200"
+            >
+              Sign In →
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
