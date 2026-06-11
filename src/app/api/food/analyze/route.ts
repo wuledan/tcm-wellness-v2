@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 
-const QWEN_API_KEY = "sk-16d61d52eba94add8bd6968c8c744df6";
+const QWEN_API_KEY = process.env.QWEN_API_KEY || "";
 const QWEN_API_BASE = "https://dashscope.aliyuncs.com/compatible-mode/v1";
 
-const DS_API_KEY = "sk-f0T5tXizIYzrLDB5L5kDJ0pwpfqdoRNxqE22aopWktYwYEdIFaVHMSuQ10f9ahJC";
+const DS_API_KEY = process.env.DEEPSEEK_API_KEY || "";
 const DS_API_BASE = "https://opencode.ai/zen/go/v1";
 
 export async function POST(request: NextRequest) {
@@ -20,6 +20,13 @@ export async function POST(request: NextRequest) {
 
     const langMap: Record<string, string> = { en: "English", zh: "Chinese", ko: "Korean", vi: "Vietnamese" };
     const replyLang = langMap[language] || "English";
+
+    if (!QWEN_API_KEY) {
+      return NextResponse.json({ error: "Qwen API key not configured" }, { status: 500 });
+    }
+    if (!DS_API_KEY) {
+      return NextResponse.json({ error: "DeepSeek API key not configured" }, { status: 500 });
+    }
 
     // ========== Step 1: Identify food via Qwen-VL-Plus (Vision) ==========
     const visionResponse = await fetch(`${QWEN_API_BASE}/chat/completions`, {

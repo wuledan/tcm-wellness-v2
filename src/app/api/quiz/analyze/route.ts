@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 
-const API_KEY = "sk-f0T5tXizIYzrLDB5L5kDJ0pwpfqdoRNxqE22aopWktYwYEdIFaVHMSuQ10f9ahJC";
+const API_KEY = process.env.DEEPSEEK_API_KEY || "";
 const API_BASE = "https://opencode.ai/zen/go/v1";
 
 const SYSTEM_PROMPT = `You are a TCM (Traditional Chinese Medicine) constitution analysis expert. Your role is to analyze quiz answers and determine the user's body constitution type according to the 9-type TCM constitution classification system.
@@ -22,6 +22,10 @@ Respond with a confidence score between 0 and 1 reflecting how certain you are a
 
 export async function POST(request: NextRequest) {
   try {
+    if (!API_KEY) {
+      return NextResponse.json({ error: "DeepSeek API key not configured" }, { status: 500 });
+    }
+
     const session = await auth();
     const body = await request.json();
     const { answers, language } = body;

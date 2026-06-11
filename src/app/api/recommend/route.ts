@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_KEY = "sk-f0T5tXizIYzrLDB5L5kDJ0pwpfqdoRNxqE22aopWktYwYEdIFaVHMSuQ10f9ahJC";
+const API_KEY = process.env.DEEPSEEK_API_KEY || "";
 const API_BASE = "https://opencode.ai/zen/go/v1";
 
 export async function POST(request: NextRequest) {
   try {
+    if (!API_KEY) {
+      return NextResponse.json({ error: "DeepSeek API key not configured" }, { status: 500 });
+    }
+
     const body = await request.json();
     const { constitutionType, constitutionName, season, language } = body;
 
