@@ -70,7 +70,6 @@ Return ONLY valid JSON in this exact format (no markdown, no code fences):
           { role: "user", content: userPrompt },
         ],
         temperature: 0.3,
-        reasoning_effort: "disabled",
         response_format: { type: "json_object" },
       }),
     });
